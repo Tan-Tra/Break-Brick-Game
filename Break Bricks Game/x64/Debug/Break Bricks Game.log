@@ -1,0 +1,4 @@
+﻿  Source.cpp
+D:\My Code\OOP\TH\Đồ án\Break-Bricks-Game\Break Bricks Game\Source.cpp(92,14): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
+D:\My Code\OOP\TH\Đồ án\Break-Bricks-Game\Break Bricks Game\Source.cpp(92,16): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
+  Break Bricks Game.vcxproj -> D:\My Code\OOP\TH\Đồ án\Break-Bricks-Game\x64\Debug\Break Bricks Game.exe
