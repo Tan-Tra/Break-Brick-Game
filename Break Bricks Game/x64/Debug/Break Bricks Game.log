@@ -1,4 +1,25 @@
-﻿  Source.cpp
-D:\My Code\OOP\TH\Đồ án\Break-Bricks-Game\Break Bricks Game\Source.cpp(92,14): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
-D:\My Code\OOP\TH\Đồ án\Break-Bricks-Game\Break Bricks Game\Source.cpp(92,16): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
-  Break Bricks Game.vcxproj -> D:\My Code\OOP\TH\Đồ án\Break-Bricks-Game\x64\Debug\Break Bricks Game.exe
+﻿  Ball.cpp
+C:\Users\Minh Tan\Documents\GitHub\Break-Brick-Game\Break Bricks Game\Ball.cpp(51,22): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Minh Tan\Documents\GitHub\Break-Brick-Game\Break Bricks Game\Ball.cpp(54,22): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Minh Tan\Documents\GitHub\Break-Brick-Game\Break Bricks Game\Ball.cpp(57,22): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Minh Tan\Documents\GitHub\Break-Brick-Game\Break Bricks Game\Ball.cpp(60,22): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Minh Tan\Documents\GitHub\Break-Brick-Game\Break Bricks Game\Ball.cpp(63,22): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Minh Tan\Documents\GitHub\Break-Brick-Game\Break Bricks Game\Ball.cpp(64,22): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Minh Tan\Documents\GitHub\Break-Brick-Game\Break Bricks Game\Ball.cpp(67,22): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Minh Tan\Documents\GitHub\Break-Brick-Game\Break Bricks Game\Ball.cpp(68,22): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Minh Tan\Documents\GitHub\Break-Brick-Game\Break Bricks Game\Ball.cpp(71,22): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Minh Tan\Documents\GitHub\Break-Brick-Game\Break Bricks Game\Ball.cpp(72,22): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Minh Tan\Documents\GitHub\Break-Brick-Game\Break Bricks Game\Ball.cpp(75,22): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Minh Tan\Documents\GitHub\Break-Brick-Game\Break Bricks Game\Ball.cpp(76,22): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Minh Tan\Documents\GitHub\Break-Brick-Game\Break Bricks Game\Ball.cpp(100,22): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Minh Tan\Documents\GitHub\Break-Brick-Game\Break Bricks Game\Ball.cpp(103,22): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Minh Tan\Documents\GitHub\Break-Brick-Game\Break Bricks Game\Ball.cpp(106,22): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Minh Tan\Documents\GitHub\Break-Brick-Game\Break Bricks Game\Ball.cpp(109,22): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Minh Tan\Documents\GitHub\Break-Brick-Game\Break Bricks Game\Ball.cpp(110,22): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Minh Tan\Documents\GitHub\Break-Brick-Game\Break Bricks Game\Ball.cpp(113,22): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Minh Tan\Documents\GitHub\Break-Brick-Game\Break Bricks Game\Ball.cpp(114,22): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Minh Tan\Documents\GitHub\Break-Brick-Game\Break Bricks Game\Ball.cpp(117,22): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Minh Tan\Documents\GitHub\Break-Brick-Game\Break Bricks Game\Ball.cpp(118,22): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Minh Tan\Documents\GitHub\Break-Brick-Game\Break Bricks Game\Ball.cpp(121,22): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Minh Tan\Documents\GitHub\Break-Brick-Game\Break Bricks Game\Ball.cpp(122,22): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+  Break Bricks Game.vcxproj -> C:\Users\Minh Tan\Documents\GitHub\Break-Brick-Game\x64\Debug\Break Bricks Game.exe

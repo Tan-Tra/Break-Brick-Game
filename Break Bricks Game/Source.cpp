@@ -3,9 +3,9 @@
 #include<vector>
 #include<fstream>
 #include<Windows.h>
+#include "Map.h"
 using namespace std;
-#define SCREEN_X 72
-#define SCREEN_Y 22
+
 
 class User
 {
