@@ -75,13 +75,6 @@ void fwriteGoal(vector<User> dstk)
 	}
 	f.close();
 }
-void Color(int cl)// hàm thay đổi màu sắc chữ
-{
-	//hàm tham khảo tiêu chuẩn
-	HANDLE color;
-	color = GetStdHandle(STD_OUTPUT_HANDLE);
-	SetConsoleTextAttribute(color, cl);
-}
 
 void gotoXY(int x, int y)// hàm đưa con trỏ đến một vị trí bất kì trên màn hình và thực hiện các thao tác tiếp theo như in màn hình từ vị trí đó về sau
 {
@@ -94,94 +87,4 @@ void gotoXY(int x, int y)// hàm đưa con trỏ đến một vị trí bất k�
 
 }
 
-void printMap(int map[15][70])
-{
-	for (int i = 0; i < 15; i++)
-	{
-		for (int j = 0; j < 70; j++)
-		{
-			switch (map[i][j])
-			{
-			case 7:
-			{
-				Color(8);
-			}break;
-			case 1:
-			{
-				Color(10);
-			}break;
-			case 2:
-			{
-				Color(11);
-			}break;
-			default:
-				break;
-			}
-			if (map[i][j] != 0)
-				cout << "\xDB";
-			else cout << " ";
-			Color(15);
-		}
-		gotoXY(1, i+1);
 
-	}
-}
-
-void freadMap(int& level, int map[15][70])
-{
-	fstream f("Map2.txt");
-	if (f.fail())
-	{
-		return;
-	}
-	
-	for (int i = 0; i < 15; i++)
-	{
-		for (int j = 0; j < 70; j++)
-		{
-			f >> map[i][j];
-		}
-
-	}
-}
-void drawWall()
-{
-	//vẽ tường trên
-	for (int i = 0; i < SCREEN_X + 1; i++)
-		cout << "\xB2";
-	cout << endl;
-	for (int i = 0; i < SCREEN_Y; i++)
-	{
-		for (int j = 0; j < SCREEN_X + 1; j++)
-		{
-			// vẽ tường trái
-			if (j == 0)
-				cout << "\xB2";
-			
-			// vẽ tường phải
-			else if (j == SCREEN_X)
-				cout << "\xB2";
-			else cout << " ";
-		}
-		cout << endl;
-	}
-
-	//vễ tường dưới
-	for (int i = 0; i < SCREEN_X + 1; i++)
-		cout << "\xB2";
-	cout << endl;
-}
-
-int main()
-{
-	
-	int map[15][70], level=0;
-	drawWall();
-
-	gotoXY(1, 1);
-	freadMap(level, map);
-	printMap(map);
-	system("pause>nul");
-	return 1;
-
-}

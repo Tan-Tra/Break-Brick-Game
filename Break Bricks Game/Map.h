@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include<iostream>
 #include<string>
@@ -12,6 +12,9 @@ using namespace std;
 
 void gotoXY(int x, int y);
 
+// hàm thay đổi màu sắc chữ
+void Color(int cl);
+
 struct vector2D
 {
 	int x, y;
@@ -19,7 +22,11 @@ struct vector2D
 
 class Map
 {
+public:
 	int data[15][70];
 	int level;
+	void printMap();
+	void freadMap();
+	void drawWall();
 };
 
