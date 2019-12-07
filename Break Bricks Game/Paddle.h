@@ -18,5 +18,11 @@ public:
 	void setDirection(eDir dir);
 	vector2D getPosition();
 	eDir getDirection();
+
+	void moveLeft();
+	void moveRight();
+
+	void draw();
+	void drawFill();
 };
 

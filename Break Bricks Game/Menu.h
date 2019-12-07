@@ -17,11 +17,7 @@ int resultMenu(int score, int level);
 
 void main()
 {
-	printTitle();
-	system("cls");
-	startMenu();
-	system("cls");
-	resultMenu(100, 3);
+	
 
 }
 
