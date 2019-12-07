@@ -17,7 +17,7 @@ public:
 	vector2D getPosition();
 	eDir getDirection();
 	void draw();
-	void refill();
+	void printFill();
 	void move();
 	void conllision(Map& map, Paddle& pad);
 };
