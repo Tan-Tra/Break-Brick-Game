@@ -13,6 +13,7 @@ public:
 	Ball();
 	~Ball();
 	void setPosition(vector2D& pos);
+	void setPosition(int pos_y, int pos_x);
 	void setDirection(eDir dir);
 	vector2D getPosition();
 	eDir getDirection();

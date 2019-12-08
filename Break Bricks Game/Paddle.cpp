@@ -19,7 +19,7 @@ void Paddle::setPosition(vector2D& pos)
 
 void Paddle::setDirection(eDir dir)
 {
-	
+
 }
 
 vector2D Paddle::getPosition()
@@ -34,28 +34,34 @@ eDir Paddle::getDirection()
 
 void Paddle::moveLeft()
 {
+	this->drawFill();
 	position.x--;
+	this->draw();
 }
 
 void Paddle::moveRight()
 {
+	this->drawFill();
 	position.x++;
+	this->drawFill();
 }
 
 void Paddle::draw()
 {
-	gotoXY(position.x - size, SCREEN_Y);
-	for (int i = position.x-size; i <position.x+size ; i++)
+	gotoXY(position.x - size, position.y);
+	for (int i = position.x - size; i < position.x + size; i++)
 	{
 		cout << "\xDB";
 	}
+	gotoXY(SCREEN_X + 2, SCREEN_Y + 2);
 }
 
 void Paddle::drawFill()
 {
-	gotoXY(position.x - size, SCREEN_Y);
+	gotoXY(position.x - size, position.y);
 	for (int i = position.x - size; i < position.x + size; i++)
 	{
 		cout << " ";
 	}
+	gotoXY(SCREEN_X + 2, SCREEN_Y + 2);
 }

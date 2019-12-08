@@ -17,8 +17,3 @@ void guide()
 	}
 	system("pause>nul");
 }
-
-void main()
-{
-	guide();
-}

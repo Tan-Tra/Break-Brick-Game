@@ -83,6 +83,6 @@ void Map::drawWall()
 
 	//vễ tường dưới
 	for (int i = 0; i < SCREEN_X + 1; i++)
-		cout << "\xB2";
+		cout << "_";
 	cout << endl;
 }

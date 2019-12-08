@@ -9,10 +9,20 @@ Ball::Ball()
 	direction = STOP;
 }
 
+Ball::~Ball()
+{
+}
+
 void Ball::setPosition(vector2D& pos)
 {
 	position.x = pos.x;
 	position.y = pos.y;
+}
+
+void Ball::setPosition(int pos_y, int pos_x)
+{
+	position.y = pos_y;
+	position.x = pos_x;
 }
 
 void Ball::setDirection(eDir dir)
@@ -86,137 +96,179 @@ void Ball::conllision(Map& map, Paddle& pad)
 	switch (direction)
 	{
 	case LEFT:
-		//cham tuong
-		if (position.x <= 1)
-		{
-			position.x = 1;
-			direction = RIGHT;
-		}
 
-		//cham gach
-		if (position.y < 15)
+		for (int i = 1; i <= speed; i++)
 		{
-			for (int i = 0; i < speed; i++)
+			//cham tuong
+			if (position.x - i <= 1)
 			{
-				switch (map.data[position.y][position.x - i])
+				this->printFill();
+				position.x = 1;
+				direction = RIGHT;
+				this->draw();
+				return;
+			}
+
+			//cham gach
+			if (position.y < 15)
+			{
+
+				switch (map.data[position.y][position.x - i - 1])
 				{
 				case 0:
 					break;
 				case 1:
+					this->printFill();
 					p.x = position.x - i;
 					p.y = position.y;
 					this->setPosition(p);
 					printFill();
 					direction = RIGHT;
-					map.data[position.y][position.x - i]--;
+					this->draw();
+					map.data[p.y][p.x - 1]--;
+					i = speed;
 					break;
 
 				case 2:
+					this->printFill();
 					p.x = position.x - i + 1;
 					p.y = position.y;
 					this->setPosition(p);
 					direction = RIGHT;
-					map.data[position.y][position.x - i]--;
+					this->draw();
+					map.data[p.y][p.x - 1 - 1]--;
+					i = speed;
 					//chinh mau
 					break;
 
 				case 7:
+					this->printFill();
 					p.x = position.x - i + 1;
 					p.y = position.y;
 					this->setPosition(p);
 					direction = RIGHT;
+					this->draw();
+					i = speed;
 					break;
 
 				}
+
 			}
 		}
-
 		break;
 	case RIGHT:
-		//cham tuong
-		if (position.x >= SCREEN_X - 1)
-		{
-			position.x = SCREEN_X - 1;
-			direction = LEFT;
-		}
 
-		//cham gach
-		if (position.y < 15)
+		for (int i = 1; i <= speed; i++)
 		{
-			for (int i = 0; i < speed; i++)
+			//cham tuong
+			if (position.x + i >= SCREEN_X - 1)
 			{
-				switch (map.data[position.y][position.x + i])
+				this->printFill();
+				position.x = SCREEN_X - 1;
+				direction = LEFT;
+				this->draw();
+				return;
+			}
+
+			//cham gach
+			if (position.y < 15)
+			{
+
+				switch (map.data[position.y][position.x + i - 1])
 				{
 				case 0:
 					break;
 				case 1:
+					this->printFill();
 					p.x = position.x + i;
 					p.y = position.y;
 					this->setPosition(p);
 					printFill();
 					direction = LEFT;
-					map.data[position.y][position.x + i]--;
+					this->draw();
+					map.data[p.y][p.x - 1]--;
+					i = speed;
 					break;
 
 				case 2:
+					this->printFill();
 					p.x = position.x + i - 1;
 					p.y = position.y;
 					this->setPosition(p);
 					direction = LEFT;
-					map.data[position.y][position.x + i]--;
+					this->draw();
+					map.data[p.y][p.x]--;
+					i = speed;
 					break;
 
 				case 7:
+					this->printFill();
 					p.x = position.x + i - 1;
 					p.y = position.y;
 					this->setPosition(p);
 					direction = LEFT;
+					this->draw();
+					i = speed;
 					break;
 
 				}
+
 			}
 		}
-
 		break;
 	case UP:
-		//cham tuong
-		if (position.y <= 1)
-		{
-			position.y = 1;
-			direction = DOWN;
-		}
 
-		//cham gach
-		if (position.y < 15)
+		for (int i = 1; i <= speed; i++)
 		{
-			for (int i = 0; i < speed; i++)
+			//cham tuong
+			if (position.y - i <= 1)
 			{
-				switch (map.data[position.y - i][position.x])
+				this->printFill();
+				position.y = 1;
+				direction = DOWN;
+				this->draw();
+				return;
+			}
+
+			//cham gach
+			if (position.y < 15)
+			{
+
+				switch (map.data[position.y - i][position.x - 1])
 				{
 				case 0:
 					break;
 				case 1:
+					this->printFill();
 					p.x = position.x;
 					p.y = position.y - i;
 					this->setPosition(p);
 					printFill();
 					direction = DOWN;
-					map.data[position.y - i][position.x]--;
+					this->draw();
+					map.data[p.y][p.x - 1]--;
+					i = speed;
 					break;
 
 				case 2:
+					this->printFill();
 					p.x = position.x;
 					p.y = position.y - i + 1;
 					this->setPosition(p);
 					direction = DOWN;
-					map.data[position.y - i][position.x]--;
+					this->draw();
+					map.data[p.y - 1][p.x - 1]--;
+					i = speed;
 					break;
 
 				case 7:
+					this->printFill();
 					p.x = position.x;
 					p.y = position.y - i + 1;
 					this->setPosition(p);
 					direction = DOWN;
+					this->draw();
+					i = speed;
 					break;
 
 				}
@@ -226,96 +278,159 @@ void Ball::conllision(Map& map, Paddle& pad)
 		break;
 	case DOWN:
 
-		//cham gach
-		if (position.y < 15)
+		for (int i = 1; i <= speed; i++)
 		{
-			for (int i = 0; i < speed; i++)
+			//cham gach
+			if (position.y < 15)
 			{
-				switch (map.data[position.y + i][position.x])
+
+				switch (map.data[position.y + i][position.x - 1])
 				{
 				case 0:
 					break;
 				case 1:
+					this->printFill();
 					p.x = position.x;
 					p.y = position.y + i;
 					this->setPosition(p);
 					printFill();
 					direction = UP;
-					map.data[position.y + i][position.x]--;
+					this->draw();
+					map.data[p.y][p.x - 1]--;
+					i = speed;
 					break;
 
 				case 2:
+					this->printFill();
 					p.x = position.x;
 					p.y = position.y + i - 1;
 					this->setPosition(p);
 					direction = UP;
-					map.data[position.y + i][position.x]--;
+					this->draw();
+					map.data[p.y + 1][p.x - 1]--;
+					i = speed;
 					break;
 
 				case 7:
+					this->printFill();
 					p.x = position.x;
 					p.y = position.y + i - 1;
 					this->setPosition(p);
 					direction = UP;
+					this->draw();
+					i = speed;
 					break;
 
 				}
 			}
-		}
-		//cham paddle
-		else
-		{
-			for (int i = 0; i < speed; i++)
+
+			//cham paddle
+			else
 			{
+
 				if (position.y + i == pad.getPosition().y && (position.x >= pad.getPosition().x - pad.size && position.x <= pad.getPosition().x + pad.size))
 				{
+					this->printFill();
 					p.x = position.x;
 					p.y = position.y + i - 1;
 					this->setPosition(p);
 					direction = UP;
+					this->draw();
+					i = speed;
+					break;
+
 				}
 			}
 		}
 		break;
 	case UPLEFT:
-		//cham tuong
-		if (position.x <= 1)
-		{
-			position.x = 1;
-			direction = UPRIGHT;
-		}
 
-		//cham gach
-		if (position.y < 15)
+		for (int i = 1; i <= speed; i++)
 		{
-			for (int i = 0; i < speed; i++)
+			//cham tuong
+			if (position.x - i <= 1 && position.y - 1 <= 1)
 			{
-				switch (map.data[position.y - i][position.x - i])
+				this->printFill();
+				position.x = 1;
+				position.y = 1;
+				direction = DOWNRIGHT;
+				this->draw();
+				return;
+			}
+
+			if (position.x - i <= 1)
+			{
+				this->printFill();
+				position.x = 1;
+				direction = UPRIGHT;
+				this->draw();
+				return;
+			}
+
+			if (position.y - 1 <= 1)
+			{
+				this->printFill();
+				position.y = 1;
+				direction = DOWNLEFT;
+				this->draw();
+				return;
+			}
+
+			//cham gach
+			if (position.y < 15)
+			{
+
+				switch (map.data[position.y - i][position.x - i - 1])
 				{
 				case 0:
 					break;
 				case 1:
+					this->printFill();
 					p.x = position.x - i;
 					p.y = position.y - i;
+					if (map.data[position.y - i][position.x - i - 1 + 1] == 0 && map.data[position.y - i + 1][position.x - i - 1] == 0)
+						direction = DOWNRIGHT;
+					else if (map.data[position.y - i][position.x - i - 1 + 1] == 0)
+						direction = UPRIGHT;
+					else
+						direction = DOWNLEFT;
+					map.data[position.y - i][position.x - i - 1]--;
 					this->setPosition(p);
 					printFill();
-					direction = (map.data[position.y - i][position.x - i + 1] == 0 && map.data[position.y - i + 1][position.x - i] == 0) ? DOWNRIGHT : UPRIGHT;
-					map.data[position.y - i][position.x - i]--;
+					this->draw();
+					i = speed;
 					break;
 
 				case 2:
+					this->printFill();
 					p.x = position.x - i + 1;
 					p.y = position.y - i + 1;
+					if (map.data[position.y - i][position.x - i - 1 + 1] == 0 && map.data[position.y - i + 1][position.x - i - 1] == 0)
+						direction = DOWNRIGHT;
+					else if (map.data[position.y - i][position.x - i - 1 + 1] == 0)
+						direction = UPRIGHT;
+					else
+						direction = DOWNLEFT;
+					map.data[position.y - i][position.x - i - 1]--;
 					this->setPosition(p);
-					direction = (map.data[position.y - i][position.x - i + 1] == 0 && map.data[position.y - i + 1][position.x - i] == 0) ? DOWNRIGHT : UPRIGHT;
-					map.data[position.y - i][position.x - i]--;
+					printFill();
+					this->draw();
+					i = speed;
 					break;
 
 				case 7:
+					this->printFill();
 					p.x = position.x - i + 1;
 					p.y = position.y - i + 1;
 					this->setPosition(p);
-					direction = (map.data[position.y - i][position.x - i + 1] == 0 && map.data[position.y - i + 1][position.x - i] == 0) ? DOWNRIGHT : UPRIGHT;
+					if (map.data[p.y][p.x - 1 + 1] == 0 && map.data[p.y + 1][p.x - 1] == 0)
+						direction = DOWNRIGHT;
+					else if (map.data[p.y][p.x - 1 + 1] == 0)
+						direction = UPRIGHT;
+					else
+						direction = DOWNLEFT;
+					this->draw();
+					i = speed;
 					break;
 
 				}
@@ -324,166 +439,284 @@ void Ball::conllision(Map& map, Paddle& pad)
 
 		break;
 	case DOWNLEFT:
-		//cham tuong
-		if (position.x <= 1)
-		{
-			position.x = 1;
-			direction = DOWNRIGHT;
-		}
 
-		//cham gach
-		if (position.y < 15)
+		for (int i = 1; i <= speed; i++)
 		{
-			for (int i = 0; i < speed; i++)
+			//cham tuong
+			if (position.x <= 1)
 			{
-				switch (map.data[position.y + i][position.x - i])
+				this->printFill();
+				position.x = 1;
+				direction = DOWNRIGHT;
+				this->draw();
+				return;
+			}
+
+			//cham gach
+			if (position.y < 15)
+			{
+
+				switch (map.data[position.y + i][position.x - i - 1])
 				{
 				case 0:
 					break;
 				case 1:
+					this->printFill();
 					p.x = position.x - i;
 					p.y = position.y + i;
+					if (map.data[position.y + i][position.x - i - 1 + 1] == 0 && map.data[position.y + i - 1][position.x - i - 1] == 0)
+						direction = UPRIGHT;
+					else if (map.data[position.y + i][position.x - i - 1 + 1] == 0)
+						direction = DOWNRIGHT;
+					else
+						direction = UPLEFT;
+
+					map.data[position.y + i][position.x - i - 1]--;
 					this->setPosition(p);
 					printFill();
-					direction = (map.data[position.y + i - 1][position.x - i] == 0 && map.data[position.y + i][position.x - i + 1] == 0) ? UPRIGHT : DOWNRIGHT;
-					map.data[position.y + i][position.x - i]--;
+					this->draw();
+					i = speed;
 					break;
 
 				case 2:
+					this->printFill();
 					p.x = position.x - i + 1;
 					p.y = position.y + i - 1;
+					if (map.data[position.y + i][position.x - i - 1 + 1] == 0 && map.data[position.y + i - 1][position.x - i - 1] == 0)
+						direction = UPRIGHT;
+					else if (map.data[position.y + i][position.x - i - 1 + 1] == 0)
+						direction = DOWNRIGHT;
+					else
+						direction = UPLEFT;
+
+					map.data[position.y + i][position.x - i - 1]--;
 					this->setPosition(p);
-					direction = (map.data[position.y + i - 1][position.x - i] == 0 && map.data[position.y + i][position.x - i + 1] == 0) ? UPRIGHT : DOWNRIGHT;
-					map.data[position.y + i][position.x - i]--;
+					printFill();
+					this->draw();
+					i = speed;
+
 					break;
 
 				case 7:
+					this->printFill();
 					p.x = position.x - i + 1;
 					p.y = position.y + i - 1;
+					if (map.data[position.y + i][position.x - i - 1 + 1] == 0 && map.data[position.y + i - 1][position.x - i - 1] == 0)
+						direction = UPRIGHT;
+					else if (map.data[position.y + i][position.x - i - 1 + 1] == 0)
+						direction = DOWNRIGHT;
+					else
+						direction = UPLEFT;
 					this->setPosition(p);
-					direction = (map.data[position.y + i - 1][position.x - i] == 0 && map.data[position.y + i][position.x - i + 1] == 0) ? UPRIGHT : DOWNRIGHT;
+					this->draw();
+					i = speed;
 					break;
 
 				}
 			}
-		}
-		//cham paddle
-		else
-		{
-			for (int i = 0; i < speed; i++)
+
+			//cham paddle
+			else
 			{
+
 				if (position.y + i == pad.getPosition().y && (position.x >= pad.getPosition().x - pad.size && position.x <= pad.getPosition().x + pad.size))
 				{
+					this->printFill();
 					p.x = position.x;
 					p.y = position.y + i - 1;
 					this->setPosition(p);
 					direction = UPLEFT;
+					this->draw();
+					i = speed;
 				}
+
 			}
 		}
 		break;
 	case UPRIGHT:
-		//cham tuong
-		if (position.x >= SCREEN_X - 1)
-		{
-			position.x = SCREEN_X - 1;
-			direction = UPLEFT;
-		}
 
-		//cham gach
-		if (position.y < 15)
+		for (int i = 1; i <= speed; i++)
 		{
-			for (int i = 0; i < speed; i++)
+
+			//cham tuong
+			if (position.x + i >= SCREEN_X - 1 && position.y - i <= 1)
 			{
-				switch (map.data[position.y - i][position.x + i])
+				this->printFill();
+				position.x = SCREEN_X - 1;
+				position.y = 1;
+				direction = DOWNLEFT;
+				this->draw();
+				return;
+			}
+
+			if (position.x + i >= SCREEN_X - 1)
+			{
+				this->printFill();
+				position.x = SCREEN_X - 1;
+				direction = UPLEFT;
+				this->draw();
+				return;
+
+			}
+
+			if (position.y + i <= 1)
+			{
+				this->printFill();
+				position.y = 1;
+				direction = DOWNRIGHT;
+				this->draw();
+				return;
+			}
+
+			//cham gach
+			if (position.y < 15)
+			{
+
+				switch (map.data[position.y - i][position.x + i - 1])
 				{
 				case 0:
 					break;
 				case 1:
+					this->printFill();
 					p.x = position.x + i;
 					p.y = position.y - i;
+					if (map.data[position.y - i][position.x + i - 1 - 1] == 0 && map.data[position.y - i + 1][position.x + i - 1] == 0)
+						direction = DOWNLEFT;
+					else if (map.data[position.y - i][position.x + i - 1 - 1] == 0)
+						direction = UPLEFT;
+					else
+						direction = DOWNRIGHT;
+					map.data[position.y - i][position.x + i - 1]--;
 					this->setPosition(p);
-					printFill();
-					direction = (map.data[position.y - i][position.x + i - 1] == 0 && map.data[position.y - i + 1][position.x + i] == 0) ? DOWNLEFT : UPLEFT;
-					map.data[position.y - i][position.x + i]--;
+					this->draw();
+					i = speed;
 					break;
 
 				case 2:
+					this->printFill();
 					p.x = position.x + i - 1;
 					p.y = position.y - i + 1;
+					if (map.data[position.y - i][position.x + i - 1 - 1] == 0 && map.data[position.y - i + 1][position.x + i - 1] == 0)
+						direction = DOWNLEFT;
+					else if (map.data[position.y - i][position.x + i - 1 - 1] == 0)
+						direction = UPLEFT;
+					else
+						direction = DOWNRIGHT;
+					map.data[position.y - i][position.x + i - 1]--;
 					this->setPosition(p);
-					direction = (map.data[position.y - i][position.x + i - 1] == 0 && map.data[position.y - i + 1][position.x + i] == 0) ? DOWNLEFT : UPLEFT;
-					map.data[position.y - i][position.x + i]--;
+					this->draw();
+					i = speed;
 					break;
 
 				case 7:
+					this->printFill();
 					p.x = position.x + i - 1;
 					p.y = position.y - i + 1;
+					if (map.data[position.y - i][position.x + i - 1 - 1] == 0 && map.data[position.y - i + 1][position.x + i - 1] == 0)
+						direction = DOWNLEFT;
+					else if (map.data[position.y - i][position.x + i - 1 - 1] == 0)
+						direction = UPLEFT;
+					else
+						direction = DOWNRIGHT;
 					this->setPosition(p);
-					direction = (map.data[position.y - i][position.x + i - 1] == 0 && map.data[position.y - i + 1][position.x + i] == 0) ? DOWNLEFT : UPLEFT;
+					this->draw();
+					i = speed;
 					break;
 
 				}
+
 			}
 		}
 		break;
 	case DOWNRIGHT:
-		//cham tuong
-		if (position.x >= SCREEN_X - 1)
-		{
-			position.x = SCREEN_X - 1;
-			direction = DOWNLEFT;
-		}
 
-		//cham gach
-		if (position.y < 15)
+		for (int i = 1; i <= speed; i++)
 		{
-			for (int i = 0; i < speed; i++)
+			//cham tuong
+			if (position.x + i >= SCREEN_X - 1)
 			{
-				switch (map.data[position.y + i][position.x + i])
+				this->printFill();
+				position.x = SCREEN_X - 1;
+				direction = DOWNLEFT;
+				this->draw();
+				return;
+			}
+
+			//cham gach
+			if (position.y < 15)
+			{
+
+				switch (map.data[position.y + i][position.x + i - 1])
 				{
 				case 0:
 					break;
 				case 1:
+					this->printFill();
 					p.x = position.x + i;
 					p.y = position.y + i;
+					if (map.data[position.y + i][position.x + i - 1 - 1] == 0 && map.data[position.y + i - 1][position.x + i - 1] == 0)
+						direction = UPLEFT;
+					else if (map.data[position.y + i][position.x + i - 1 - 1] == 0)
+						direction = DOWNLEFT;
+					else
+						direction = UPRIGHT;
+					map.data[position.y + i][position.x + i - 1]--;
 					this->setPosition(p);
-					printFill();
-					direction = (map.data[position.y + i - 1][position.x + i] == 0 && map.data[position.y + i][position.x + i - 1] == 0) ? UPLEFT : DOWNLEFT;
-					map.data[position.y + i][position.x + i]--;
+					this->draw();
+					i = speed;
 					break;
 
 				case 2:
+					this->printFill();
 					p.x = position.x + i - 1;
 					p.y = position.y + i - 1;
+					if (map.data[position.y + i][position.x + i - 1 - 1] == 0 && map.data[position.y + i - 1][position.x + i - 1] == 0)
+						direction = UPLEFT;
+					else if (map.data[position.y + i][position.x + i - 1 - 1] == 0)
+						direction = DOWNLEFT;
+					else
+						direction = UPRIGHT;
+					map.data[position.y + i][position.x + i - 1]--;
 					this->setPosition(p);
-					direction = (map.data[position.y + i - 1][position.x + i] == 0 && map.data[position.y + i][position.x + i - 1] == 0) ? UPLEFT : DOWNLEFT;
-					map.data[position.y + i][position.x + i]--;
+					this->draw();
+					i = speed;
 					break;
 
 				case 7:
+					this->printFill();
 					p.x = position.x + i - 1;
 					p.y = position.y + i - 1;
+					if (map.data[position.y + i][position.x + i - 1 - 1] == 0 && map.data[position.y + i - 1][position.x + i - 1] == 0)
+						direction = UPLEFT;
+					else if (map.data[position.y + i][position.x + i - 1 - 1] == 0)
+						direction = DOWNLEFT;
+					else
+						direction = UPRIGHT;
 					this->setPosition(p);
-					direction = (map.data[position.y + i - 1][position.x + i] == 0 && map.data[position.y + i][position.x + i - 1] == 0) ? UPLEFT : DOWNLEFT;
+					this->draw();
+					i = speed;
 					break;
 
 				}
+
 			}
-		}
-		//cham paddle
-		else
-		{
-			for (int i = 0; i < speed; i++)
+			//cham paddle
+			else
 			{
+
 				if (position.y + i == pad.getPosition().y && (position.x >= pad.getPosition().x - pad.size && position.x <= pad.getPosition().x + pad.size))
 				{
+					this->printFill();
 					p.x = position.x;
 					p.y = position.y + i - 1;
 					this->setPosition(p);
 					direction = UPRIGHT;
+					this->draw();
+					i = speed;
 				}
+
 			}
+
 		}
 		break;
 	}

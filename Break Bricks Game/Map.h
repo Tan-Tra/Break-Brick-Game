@@ -8,7 +8,7 @@
 using namespace std;
 
 #define SCREEN_X 72
-#define SCREEN_Y 50
+#define SCREEN_Y 25
 
 void gotoXY(int x, int y);
 
