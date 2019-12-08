@@ -15,9 +15,5 @@ int resultMenu(int score, int level);
 #endif
 
 
-void main()
-{
-	
 
-}
 

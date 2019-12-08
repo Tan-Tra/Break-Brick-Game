@@ -1,0 +1,15 @@
+============================================================================
+|                               CACH CHOI                                  |
+============================================================================
+I. Chon vao che do choi ma minh muon bang cach chon lenh tuong ung.
+- 1. PLAY: de choi moi.
+- 2. RESUME de tiep tuc choi phan choi lan choi truoc.
+- 3. AUTO PLAY: may choi tu dong.
+- 4. HOW TO PLAY: de xem huong dan choi.
+- 5. QUIT GAME: de thoat game.
+II. Tro choi duoc chia lam 3 man choi:
+- Level 1: man choi de nhat.
+- Level 2: man choi duoc to chuc voi ma tran kho hon.
+- Level 3: man choi cuoi, duoc to chuc voi do choi kho nhat.
+III. Trong luc choi nguoi choi co the chon thoat game de luu lai man choi
+de co the tiep tuc choi vao lan choi ke tiep.
