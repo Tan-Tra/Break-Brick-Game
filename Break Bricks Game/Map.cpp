@@ -8,6 +8,15 @@ void Color(int cl)// hàm thay đổi màu sắc chữ
 	SetConsoleTextAttribute(color, cl);
 }
 
+void changeColor(int x, int y)
+{
+	gotoXY(x, y);
+	Color(10);
+	cout << "\xDB";
+	Color(15);
+	gotoXY(SCREEN_X + 2, SCREEN_Y + 2);
+}
+
 void Map::printMap()
 {
 	for (int i = 0; i < 15; i++)
@@ -43,7 +52,7 @@ void Map::printMap()
 
 void Map::freadMap()
 {
-	fstream f("Map2.txt");
+	fstream f("Map1.txt");
 	if (f.fail())
 	{
 		return;

@@ -19,31 +19,37 @@ void Paddle::setPosition(vector2D& pos)
 
 void Paddle::setDirection(eDir dir)
 {
-
+	direction = dir;
 }
 
 vector2D Paddle::getPosition()
 {
-	return this->position;
+	return position;
 }
 
 eDir Paddle::getDirection()
 {
-	return eDir();
+	return direction;
 }
 
 void Paddle::moveLeft()
 {
-	this->drawFill();
-	position.x--;
-	this->draw();
+	if (position.x - size > 1)
+	{
+		this->drawFill();
+		position.x -= 2;
+		this->draw();
+	}
 }
 
 void Paddle::moveRight()
 {
-	this->drawFill();
-	position.x++;
-	this->drawFill();
+	if (position.x + size < SCREEN_X-1)
+	{
+		this->drawFill();
+		position.x += 2;
+		this->draw();
+	}
 }
 
 void Paddle::draw()

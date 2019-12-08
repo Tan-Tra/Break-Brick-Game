@@ -8,6 +8,7 @@ class Paddle
 {
 private:
 	vector2D position;
+	eDir direction;
 
 public:
 	int size;	//khoảng cách từ giữa đến biên

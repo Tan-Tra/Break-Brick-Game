@@ -4,5 +4,9 @@
 
 
 void guide();
+void play(Map& map, bool& playing);
+
+
+
 #endif
 

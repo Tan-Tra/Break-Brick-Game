@@ -17,3 +17,37 @@ void guide()
 	}
 	system("pause>nul");
 }
+
+void play(Map& map, bool& playing)
+{
+	Ball ball;
+	Paddle pad;
+	ball.setDirection(UPRIGHT);
+	pad.draw();
+	while (playing)
+	{
+		ball.move();
+		ball.conllision(map, pad);
+		Sleep(100);
+		pad.setDirection(STOP);
+
+
+		if (GetAsyncKeyState(27))
+		{
+			playing = false;
+		}
+
+		if (GetAsyncKeyState(37))
+		{
+			pad.moveLeft();
+			pad.setDirection(LEFT);
+		}
+
+		if (GetAsyncKeyState(39))
+		{
+			pad.moveRight();
+			pad.setDirection(RIGHT);
+		}
+	}
+
+}

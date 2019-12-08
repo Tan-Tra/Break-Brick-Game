@@ -1,4 +1,4 @@
-#include "Ball.h"
+#include "GameManager.h"
 #include <ctime>
 
 
@@ -8,22 +8,11 @@ void main()
 	map.freadMap();
 	map.drawWall();
 	map.printMap();
+	bool playing = true;
+	play(map, playing);
+	
 
-	Paddle pad;
-	Ball ball;
-	ball.setPosition(1, 10);
-	ball.setDirection(DOWNRIGHT);
-	ball.draw();
-	gotoXY(SCREEN_X + 2, SCREEN_Y + 2);
-	system("pause");
-	while (true)
-	{
-		ball.move();
-		ball.conllision(map, pad);
-		Sleep(100);
-	}
-
-
+	
 
 
 }

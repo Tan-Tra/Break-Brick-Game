@@ -30,3 +30,5 @@ public:
 	void drawWall();
 };
 
+void changeColor(int x, int y);
+

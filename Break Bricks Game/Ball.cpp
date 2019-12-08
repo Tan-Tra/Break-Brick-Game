@@ -44,12 +44,14 @@ void Ball::draw()
 {
 	gotoXY(position.x, position.y);
 	cout << 'O';
+	gotoXY(SCREEN_X + 2, SCREEN_Y + 2);
 }
 
 void Ball::printFill()
 {
 	gotoXY(position.x, position.y);
 	cout << ' ';
+	gotoXY(SCREEN_X + 2, SCREEN_Y + 2);
 }
 
 void Ball::move()
@@ -67,7 +69,7 @@ void Ball::move()
 		position.y -= speed;
 		break;
 	case DOWN:
-		position.y -= speed;
+		position.y += speed;
 		break;
 	case UPLEFT:
 		position.x -= speed;
@@ -139,6 +141,7 @@ void Ball::conllision(Map& map, Paddle& pad)
 					map.data[p.y][p.x - 1 - 1]--;
 					i = speed;
 					//chinh mau
+					changeColor(p.x - 1, p.y);
 					break;
 
 				case 7:
@@ -199,6 +202,7 @@ void Ball::conllision(Map& map, Paddle& pad)
 					this->draw();
 					map.data[p.y][p.x]--;
 					i = speed;
+					changeColor(p.x + 1, p.y);
 					break;
 
 				case 7:
@@ -259,6 +263,7 @@ void Ball::conllision(Map& map, Paddle& pad)
 					this->draw();
 					map.data[p.y - 1][p.x - 1]--;
 					i = speed;
+					changeColor(p.x, p.y - 1);
 					break;
 
 				case 7:
@@ -309,6 +314,7 @@ void Ball::conllision(Map& map, Paddle& pad)
 					this->draw();
 					map.data[p.y + 1][p.x - 1]--;
 					i = speed;
+					changeColor(p.x, p.y + 1);
 					break;
 
 				case 7:
@@ -334,7 +340,19 @@ void Ball::conllision(Map& map, Paddle& pad)
 					p.x = position.x;
 					p.y = position.y + i - 1;
 					this->setPosition(p);
-					direction = UP;
+					switch (pad.getDirection())
+					{
+					case STOP:
+						direction = UP;
+						break;
+					case LEFT:
+						direction = UPLEFT;
+						break;
+					case RIGHT:
+						direction = UPRIGHT;
+						break;
+					}
+					
 					this->draw();
 					i = speed;
 					break;
@@ -416,6 +434,7 @@ void Ball::conllision(Map& map, Paddle& pad)
 					printFill();
 					this->draw();
 					i = speed;
+					changeColor(p.x-1, p.y - 1);
 					break;
 
 				case 7:
@@ -494,7 +513,7 @@ void Ball::conllision(Map& map, Paddle& pad)
 					printFill();
 					this->draw();
 					i = speed;
-
+					changeColor(p.x-1, p.y + 1);
 					break;
 
 				case 7:
@@ -525,7 +544,18 @@ void Ball::conllision(Map& map, Paddle& pad)
 					p.x = position.x;
 					p.y = position.y + i - 1;
 					this->setPosition(p);
-					direction = UPLEFT;
+					switch (pad.getDirection())
+					{
+					case STOP:
+						direction = UP;
+						break;
+					case LEFT:
+						direction = UPLEFT;
+						break;
+					case RIGHT:
+						direction = UPRIGHT;
+						break;
+					}
 					this->draw();
 					i = speed;
 				}
@@ -559,7 +589,7 @@ void Ball::conllision(Map& map, Paddle& pad)
 
 			}
 
-			if (position.y + i <= 1)
+			if (position.y - i <= 1)
 			{
 				this->printFill();
 				position.y = 1;
@@ -606,6 +636,7 @@ void Ball::conllision(Map& map, Paddle& pad)
 					this->setPosition(p);
 					this->draw();
 					i = speed;
+					changeColor(p.x+1, p.y - 1);
 					break;
 
 				case 7:
@@ -680,6 +711,7 @@ void Ball::conllision(Map& map, Paddle& pad)
 					this->setPosition(p);
 					this->draw();
 					i = speed;
+					changeColor(p.x+1, p.y + 1);
 					break;
 
 				case 7:
@@ -710,7 +742,18 @@ void Ball::conllision(Map& map, Paddle& pad)
 					p.x = position.x;
 					p.y = position.y + i - 1;
 					this->setPosition(p);
-					direction = UPRIGHT;
+					switch (pad.getDirection())
+					{
+					case STOP:
+						direction = UP;
+						break;
+					case LEFT:
+						direction = UPLEFT;
+						break;
+					case RIGHT:
+						direction = UPRIGHT;
+						break;
+					}
 					this->draw();
 					i = speed;
 				}
