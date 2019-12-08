@@ -49,10 +49,12 @@ int startMenu()
 	gotoXY(37, 13);
 	cout << "|           4. HOW TO PLAY                                     |" << endl;
 	gotoXY(37, 14);
-	cout << "|           5. QUIT GAME                                       |" << endl;
+	cout << "|           5. HIGHT SCORE                                     |" << endl;
 	gotoXY(37, 15);
-	cout << "================================================================" << endl;
+	cout << "|           5. QUIT GAME                                       |" << endl;
 	gotoXY(37, 16);
+	cout << "================================================================" << endl;
+	gotoXY(37, 17);
 	cout << "YOUR CHOICE: ";
 	cin >> lenh;
 	return lenh;

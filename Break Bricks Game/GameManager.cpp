@@ -18,7 +18,39 @@ void guide()
 	system("pause>nul");
 }
 
-void main()
+<<<<<<< HEAD
+=======
+void play(Map& map, bool& playing)
 {
-	guide();
+	Ball ball;
+	Paddle pad;
+	ball.setDirection(UPRIGHT);
+	pad.draw();
+	while (playing)
+	{
+		ball.move();
+		ball.conllision(map, pad);
+		Sleep(100);
+		pad.setDirection(STOP);
+
+
+		if (GetAsyncKeyState(27))
+		{
+			playing = false;
+		}
+
+		if (GetAsyncKeyState(37))
+		{
+			pad.moveLeft();
+			pad.setDirection(LEFT);
+		}
+
+		if (GetAsyncKeyState(39))
+		{
+			pad.moveRight();
+			pad.setDirection(RIGHT);
+		}
+	}
+
 }
+>>>>>>> 421ecb2e6df18ca9c83b7f44b382cc1ef85a5628

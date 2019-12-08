@@ -1,14 +1,20 @@
-﻿#pragma once
-
+﻿
+#ifndef MAP_H_
+#define MAP_H_
 #include<iostream>
 #include<string>
 #include<vector>
 #include<fstream>
 #include<Windows.h>
+
 using namespace std;
 
 #define SCREEN_X 72
-#define SCREEN_Y 50
+<<<<<<< HEAD
+#define SCREEN_Y 22
+=======
+#define SCREEN_Y 25
+>>>>>>> 421ecb2e6df18ca9c83b7f44b382cc1ef85a5628
 
 void gotoXY(int x, int y);
 
@@ -26,7 +32,10 @@ public:
 	int data[15][70];
 	int level;
 	void printMap();
-	void freadMap();
+	void freadMap(int level);
 	void drawWall();
 };
+#endif // !MAP_H_
+
+void changeColor(int x, int y);
 

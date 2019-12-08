@@ -1,11 +1,23 @@
-﻿#include "Map.h"
+﻿
+#include "Map.h"
 
+#define _CRT_SECURE_N0_WARNINGS
+#define _CRT_SECURE_N0_WARNINGS
 void Color(int cl)// hàm thay đổi màu sắc chữ
 {
 	//hàm tham khảo tiêu chuẩn
 	HANDLE color;
 	color = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(color, cl);
+}
+
+void changeColor(int x, int y)
+{
+	gotoXY(x, y);
+	Color(10);
+	cout << "\xDB";
+	Color(15);
+	gotoXY(SCREEN_X + 2, SCREEN_Y + 2);
 }
 
 void Map::printMap()
@@ -41,9 +53,17 @@ void Map::printMap()
 	}
 }
 
-void Map::freadMap()
+void Map::freadMap(int level)
 {
-	fstream f("Map2.txt");
+<<<<<<< HEAD
+	char* intStr = new char;
+	_itoa(level, intStr, 10);
+	string str = string(intStr);
+	string tenfile = "Map" + str + ".txt";
+	fstream f(tenfile);
+=======
+	fstream f("Map1.txt");
+>>>>>>> 421ecb2e6df18ca9c83b7f44b382cc1ef85a5628
 	if (f.fail())
 	{
 		return;
@@ -83,6 +103,7 @@ void Map::drawWall()
 
 	//vễ tường dưới
 	for (int i = 0; i < SCREEN_X + 1; i++)
-		cout << "\xB2";
+		cout << "_";
 	cout << endl;
 }
+
