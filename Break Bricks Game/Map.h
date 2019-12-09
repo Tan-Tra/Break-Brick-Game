@@ -10,11 +10,7 @@
 using namespace std;
 
 #define SCREEN_X 72
-<<<<<<< HEAD
-#define SCREEN_Y 22
-=======
 #define SCREEN_Y 25
->>>>>>> 421ecb2e6df18ca9c83b7f44b382cc1ef85a5628
 
 void gotoXY(int x, int y);
 

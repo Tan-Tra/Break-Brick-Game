@@ -55,15 +55,11 @@ void Map::printMap()
 
 void Map::freadMap(int level)
 {
-<<<<<<< HEAD
 	char* intStr = new char;
 	_itoa(level, intStr, 10);
 	string str = string(intStr);
 	string tenfile = "Map" + str + ".txt";
 	fstream f(tenfile);
-=======
-	fstream f("Map1.txt");
->>>>>>> 421ecb2e6df18ca9c83b7f44b382cc1ef85a5628
 	if (f.fail())
 	{
 		return;
