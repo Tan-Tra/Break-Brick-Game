@@ -765,4 +765,10 @@ void Ball::conllision(Map& map, Paddle& pad)
 	}
 }
 
+bool Ball::checkEndGame()
+{
+	if (getPosition().y == SCREEN_Y+1) return true;
+	return false;
+}
+
 

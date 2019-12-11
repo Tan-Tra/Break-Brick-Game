@@ -31,7 +31,9 @@ public:
 	void freadMap(int level);
 	void drawWall();
 };
-#endif // !MAP_H_
 
 void changeColor(int x, int y);
+
+#endif // !MAP_H_
+
 

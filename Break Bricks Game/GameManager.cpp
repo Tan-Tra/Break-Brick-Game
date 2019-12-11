@@ -31,7 +31,6 @@ void play(Map& map, bool& playing)
 		Sleep(100);
 		pad.setDirection(STOP);
 
-
 		if (GetAsyncKeyState(27))
 		{
 			playing = false;
@@ -47,6 +46,11 @@ void play(Map& map, bool& playing)
 		{
 			pad.moveRight();
 			pad.setDirection(RIGHT);
+		}
+		if (ball.checkEndGame())
+		{
+			playing = false;
+			ball.setDirection(STOP);
 		}
 	}
 
