@@ -1,8 +1,5 @@
-﻿
-#include "Map.h"
+﻿#include "Map.h"
 
-#define _CRT_SECURE_N0_WARNINGS
-#define _CRT_SECURE_N0_WARNINGS
 void Color(int cl)// hàm thay đổi màu sắc chữ
 {
 	//hàm tham khảo tiêu chuẩn
@@ -24,8 +21,10 @@ void Map::printMap()
 {
 	for (int i = 0; i < 15; i++)
 	{
-		for (int j = 0; j < 70; j++)
+		gotoXY(1, i + 1);
+		for (int j = 0; j < 15; j++)
 		{
+			
 			switch (data[i][j])
 			{
 			case 7:
@@ -44,22 +43,18 @@ void Map::printMap()
 				break;
 			}
 			if (data[i][j] != 0)
-				cout << "\xDB";
-			else cout << " ";
+				cout << "\xDB\xDB\xDB\xDB";
+			else cout << "    ";
 			Color(15);
 		}
-		gotoXY(1, i + 1);
+		
 
 	}
 }
 
-void Map::freadMap(int level)
+void Map::freadMap()
 {
-	char* intStr = new char;
-	_itoa(level, intStr, 10);
-	string str = string(intStr);
-	string tenfile = "Map" + str + ".txt";
-	fstream f(tenfile);
+	fstream f("Map4.txt");
 	if (f.fail())
 	{
 		return;
@@ -67,7 +62,7 @@ void Map::freadMap(int level)
 
 	for (int i = 0; i < 15; i++)
 	{
-		for (int j = 0; j < 70; j++)
+		for (int j = 0; j < 15; j++)
 		{
 			f >> data[i][j];
 		}
@@ -103,3 +98,12 @@ void Map::drawWall()
 	cout << endl;
 }
 
+
+
+void Nocursortype()
+{
+	CONSOLE_CURSOR_INFO Info;
+	Info.bVisible = FALSE;
+	Info.dwSize = 20;
+	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &Info);
+}
