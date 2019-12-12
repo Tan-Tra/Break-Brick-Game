@@ -26,14 +26,16 @@ void play(Map& map, bool& playing)
 	ball.draw();
 	pad.draw();
 	system("pause>nul");
+	srand(time_t(NULL));
 	while (playing)
 	{
 		map.printMap();
-		//ball.conllision(map, pad);
-		Sleep(50);
+		ball.conllision(map, pad);
 		ball.conllision(map, pad);
 		ball.move();
-		
+		Sleep(20);
+
+
 		pad.setDirection(STOP);
 
 
@@ -53,6 +55,69 @@ void play(Map& map, bool& playing)
 			pad.moveRight();
 			pad.setDirection(RIGHT);
 		}
+
+		if (ball.getPosition().x <= pad.getPosition().x)
+		{
+			pad.moveLeft();
+			eDir r = (eDir)(rand() % 3);
+			pad.setDirection(r);
+		}
+
+		if (ball.getPosition().x >= pad.getPosition().x)
+		{
+			pad.moveRight();
+			eDir r = (eDir)(rand() % 3);
+			pad.setDirection(r);
+		}
+
+		if (ball.getPosition().y > SCREEN_Y)
+			playing = false;
 	}
 
+
+
+
+}
+
+void autoPlay(Map& map, bool& playing)
+{
+	Ball ball;
+	Paddle pad;
+	ball.setDirection(UP);
+	ball.draw();
+	pad.draw();
+	system("pause>nul");
+	srand(time_t(NULL));
+	while (playing)
+	{
+		map.printMap();
+		ball.conllision(map, pad);
+		ball.conllision(map, pad);
+		ball.move();
+		Sleep(20);
+
+
+		if (GetAsyncKeyState(27))
+		{
+			playing = false;
+		}
+
+
+		if (ball.getPosition().x <= pad.getPosition().x)
+		{
+			pad.moveLeft();
+			eDir r = (eDir)(rand() % 3);
+			pad.setDirection(r);
+		}
+
+		if (ball.getPosition().x >= pad.getPosition().x)
+		{
+			pad.moveRight();
+			eDir r = (eDir)(rand() % 3);
+			pad.setDirection(r);
+		}
+
+		if (ball.getPosition().y > SCREEN_Y)
+			playing = false;
+	}
 }

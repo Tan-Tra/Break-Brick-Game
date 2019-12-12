@@ -7,8 +7,8 @@
 #include<Windows.h>
 using namespace std;
 
-#define SCREEN_X 62
-#define SCREEN_Y 30
+#define SCREEN_X 61
+#define SCREEN_Y 40
 
 void gotoXY(int x, int y);
 

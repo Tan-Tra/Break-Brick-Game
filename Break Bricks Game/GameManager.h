@@ -5,6 +5,7 @@
 
 void guide();
 void play(Map& map, bool& playing);
+void autoPlay(Map& map, bool& playing);
 
 
 

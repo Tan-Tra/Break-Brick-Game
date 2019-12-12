@@ -11,7 +11,7 @@ void main()
 	map.drawWall();
 	map.printMap();
 	bool playing = true;
-	play(map, playing);
+	autoPlay(map, playing);
 	
 
 	

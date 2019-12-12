@@ -54,7 +54,7 @@ void Map::printMap()
 
 void Map::freadMap()
 {
-	fstream f("Map4.txt");
+	fstream f("Map1.txt");
 	if (f.fail())
 	{
 		return;

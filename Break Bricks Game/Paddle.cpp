@@ -38,6 +38,8 @@ void Paddle::moveLeft()
 	{
 		this->drawFill();
 		position.x -= PADDLE_SPEED;
+		if (position.x - size <= 1)
+			position.x = size + 1;
 		this->draw();
 	}
 }
@@ -48,6 +50,8 @@ void Paddle::moveRight()
 	{
 		this->drawFill();
 		position.x += PADDLE_SPEED;
+		if (position.x + size >= SCREEN_X - 1)
+			position.x = SCREEN_X - size;
 		this->draw();
 	}
 }
