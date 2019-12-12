@@ -1,6 +1,7 @@
 #pragma once
 #include "Paddle.h"
 #define BALL_SPEED 1
+#define BALL_SPEED_MAX 2
 
 
 class Ball
@@ -21,6 +22,5 @@ public:
 	void printFill();
 	void move();
 	void conllision(Map& map, Paddle& pad);
-	bool checkEndGame();
 };
 

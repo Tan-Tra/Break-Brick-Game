@@ -1,21 +1,20 @@
-﻿
-#ifndef MAP_H_
-#define MAP_H_
+﻿#pragma once
+
 #include<iostream>
 #include<string>
 #include<vector>
 #include<fstream>
 #include<Windows.h>
-
 using namespace std;
 
-#define SCREEN_X 72
-#define SCREEN_Y 25
+#define SCREEN_X 62
+#define SCREEN_Y 30
 
 void gotoXY(int x, int y);
 
 // hàm thay đổi màu sắc chữ
 void Color(int cl);
+void Nocursortype();
 
 struct vector2D
 {
@@ -25,15 +24,12 @@ struct vector2D
 class Map
 {
 public:
-	int data[15][70];
+	int data[15][15];
 	int level;
 	void printMap();
-	void freadMap(int level);
+	void freadMap();
 	void drawWall();
 };
 
 void changeColor(int x, int y);
-
-#endif // !MAP_H_
-
 
