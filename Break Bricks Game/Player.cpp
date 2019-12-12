@@ -1,6 +1,6 @@
 #include "Player.h"
 
-void Player::printScore()
+void Player::printMenuScore()
 {
 	Color(11);
 	gotoXY(70 + 7, 11);
@@ -25,8 +25,14 @@ void Player::printScore()
 	Color(14);
 	cout << "BREAK BRICKS GAME";
 	gotoXY(70 + 10, 15);
-	cout << "SCORE: " << this->score;
+	cout << "SCORE: ";
 	gotoXY(SCREEN_X + 2, SCREEN_Y+1);
+}
+
+void Player::printScore()
+{
+	gotoXY(70 + 17, 15);
+	cout << score;
 }
 
 Map Player::getMap()

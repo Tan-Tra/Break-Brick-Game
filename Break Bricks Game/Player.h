@@ -4,8 +4,13 @@ class Player
 {
 public:
 	Map map;
-	int score;
+	int score,level;
+	string ten;
+
+	void printMenuScore();
 	void printScore();
 	Map getMap();
+	void fread();
+	void fwrite();
 };
 
