@@ -5,6 +5,8 @@
 #include<vector>
 #include<fstream>
 #include<Windows.h>
+#include<time.h>
+
 using namespace std;
 
 #define SCREEN_X 61

@@ -1,7 +1,6 @@
 #ifndef _MENU_H_
 #define _MENU_H_
 #include"Map.h"
-#include<time.h>
 #include<Windows.h>
 #include<iostream>
 using namespace std;

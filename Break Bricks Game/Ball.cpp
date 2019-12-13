@@ -40,21 +40,24 @@ eDir Ball::getDirection()
 	return direction;
 }
 
-void Ball::draw()
+void Ball::draw(bool& bom)
 {
 	gotoXY(position.x, position.y);
+	if (bom)
+	{
+		Color(12);
+	}
 	cout << 'O';
-	gotoXY(SCREEN_X + 2, SCREEN_Y + 2);
+	Color(15);
 }
 
 void Ball::printFill()
 {
 	gotoXY(position.x, position.y);
 	cout << ' ';
-	gotoXY(SCREEN_X + 2, SCREEN_Y + 2);
 }
 
-void Ball::move()
+void Ball::move(bool& bom)
 {
 	printFill();
 	switch (direction)
@@ -97,11 +100,11 @@ void Ball::move()
 		}
 		break;
 	}
-	draw();
+	draw(bom);
 
 }
 
-void Ball::conllision(Map& map, Paddle& pad)
+void Ball::conllision(Map& map, Paddle& pad, bool& bom)
 {
 	vector2D p;
 	switch (direction)
@@ -116,13 +119,20 @@ void Ball::conllision(Map& map, Paddle& pad)
 				this->printFill();
 				position.y = 1;
 				direction = DOWN;
-				this->draw();
+				this->draw(bom);
 				return;
 			}
 
 			//cham gach
 			if (position.y - i < 16)
 			{
+				//banh sieu cap
+				if (bom)
+				{
+					map.data[position.y - 1 - i][(position.x - 1) / 4] = 0;
+					continue;
+				}
+
 
 				switch (map.data[position.y - 1 - i][(position.x - 1) / 4])
 				{
@@ -138,7 +148,7 @@ void Ball::conllision(Map& map, Paddle& pad)
 					p.y = position.y - i + 1;
 					this->setPosition(p);
 					direction = DOWN;
-					this->draw();
+					this->draw(bom);
 					return;
 
 				}
@@ -153,6 +163,13 @@ void Ball::conllision(Map& map, Paddle& pad)
 			//cham gach
 			if (position.y + i < 16)
 			{
+				
+				if (bom)
+				{
+					map.data[position.y + i - 1][(position.x - 1) / 4] = 0;
+					continue;
+				}
+
 
 				switch (map.data[position.y + i - 1][(position.x - 1) / 4])
 				{
@@ -170,7 +187,7 @@ void Ball::conllision(Map& map, Paddle& pad)
 					this->setPosition(p);
 					printFill();
 					direction = UP;
-					this->draw();
+					this->draw(bom);
 					return;
 				}
 			}
@@ -198,7 +215,7 @@ void Ball::conllision(Map& map, Paddle& pad)
 						break;
 					}
 
-					this->draw();
+					this->draw(bom);
 					i = speed;
 					if (speed < BALL_SPEED_MAX)
 						speed *= 1.1;
@@ -219,7 +236,7 @@ void Ball::conllision(Map& map, Paddle& pad)
 				position.x = 1;
 				position.y = 1;
 				direction = DOWNRIGHT;
-				this->draw();
+				this->draw(bom);
 				return;
 			}
 
@@ -228,7 +245,7 @@ void Ball::conllision(Map& map, Paddle& pad)
 				this->printFill();
 				position.x = 1;
 				direction = UPRIGHT;
-				this->draw();
+				this->draw(bom);
 				return;
 			}
 
@@ -237,13 +254,19 @@ void Ball::conllision(Map& map, Paddle& pad)
 				this->printFill();
 				position.y = 1;
 				direction = DOWNLEFT;
-				this->draw();
+				this->draw(bom);
 				return;
 			}
 
 			//cham gach
 			if (position.y - i < 16)
 			{
+
+				if (bom)
+				{
+					map.data[position.y - i - 1][(position.x - i - 1) / 4] = 0;
+					continue;
+				}
 
 				switch (map.data[position.y - i - 1][(position.x - i - 1) / 4])
 				{
@@ -257,7 +280,14 @@ void Ball::conllision(Map& map, Paddle& pad)
 					p.x = position.x - i + 1;
 					p.y = position.y - i + 1;
 					if ((map.data[position.y - i - 1][(position.x - i - 1) / 4 + 1] == 0) && (map.data[position.y - i - 1 + 1][(position.x - i - 1) / 4] == 0))
-						direction = DOWNRIGHT;
+					{
+						if ((position.x - i - 1) % 4 == 3)
+							direction = DOWNRIGHT;
+						else
+						{
+							direction = DOWNLEFT;
+						}
+					}
 					else if (map.data[position.y - i - 1][(position.x - i - 1) / 4 + 1] == 0)
 						direction = UPRIGHT;
 					else if (map.data[position.y - i - 1 + 1][(position.x - i - 1) / 4] == 0)
@@ -270,7 +300,7 @@ void Ball::conllision(Map& map, Paddle& pad)
 							map.data[position.y - i - 1 + 1][(position.x - i - 1) / 4]--;
 					}
 					this->setPosition(p);
-					this->draw();
+					this->draw(bom);
 					return;
 
 				}
@@ -288,13 +318,19 @@ void Ball::conllision(Map& map, Paddle& pad)
 				this->printFill();
 				position.x = 1;
 				direction = DOWNRIGHT;
-				this->draw();
+				this->draw(bom);
 				return;
 			}
 
 			//cham gach
 			if (position.y + i < 16)
 			{
+
+				if (bom)
+				{
+					map.data[position.y + i - 1][(position.x - i - 1) / 4] = 0;
+					continue;
+				}
 
 				switch (map.data[position.y + i - 1][(position.x - i - 1) / 4])
 				{
@@ -310,7 +346,14 @@ void Ball::conllision(Map& map, Paddle& pad)
 					p.x = position.x - i + 1;
 					p.y = position.y + i - 1;
 					if ((map.data[position.y + i - 1][(position.x - i - 1) / 4 + 1] == 0) && (map.data[position.y + i - 1 - 1][(position.x - i - 1) / 4] == 0))
+					{
+						if ((position.x - i - 1) % 4==3)
 						direction = UPRIGHT;
+						else
+						{
+							direction = UPLEFT;
+						}
+					}
 					else if (map.data[position.y + i - 1][(position.x - i - 1) / 4 + 1] == 0)
 						direction = DOWNRIGHT;
 					else if (map.data[position.y + i - 1 - 1][(position.x - i - 1) / 4] == 0)
@@ -323,7 +366,7 @@ void Ball::conllision(Map& map, Paddle& pad)
 							map.data[position.y + i - 1 - 1][(position.x - i - 1) / 4]--;
 					}
 					this->setPosition(p);
-					this->draw();
+					this->draw(bom);
 					return;
 
 				}
@@ -351,7 +394,7 @@ void Ball::conllision(Map& map, Paddle& pad)
 						direction = UPRIGHT;
 						break;
 					}
-					this->draw();
+					this->draw(bom);
 					i = speed;
 					if (speed < BALL_SPEED_MAX)
 						speed *= 1.1;
@@ -373,7 +416,7 @@ void Ball::conllision(Map& map, Paddle& pad)
 				position.x = SCREEN_X - 1;
 				position.y = 1;
 				direction = DOWNLEFT;
-				this->draw();
+				this->draw(bom);
 				return;
 			}
 
@@ -382,7 +425,7 @@ void Ball::conllision(Map& map, Paddle& pad)
 				this->printFill();
 				position.x = SCREEN_X - 1;
 				direction = UPLEFT;
-				this->draw();
+				this->draw(bom);
 				return;
 
 			}
@@ -392,13 +435,19 @@ void Ball::conllision(Map& map, Paddle& pad)
 				this->printFill();
 				position.y = 1;
 				direction = DOWNRIGHT;
-				this->draw();
+				this->draw(bom);
 				return;
 			}
 
 			//cham gach
 			if (position.y - i < 16)
 			{
+
+				if (bom)
+				{
+					map.data[position.y - i - 1][(position.x + i - 1) / 4] = 0;
+					continue;
+				}
 
 				switch (map.data[position.y - i - 1][(position.x + i - 1) / 4])
 				{
@@ -414,7 +463,14 @@ void Ball::conllision(Map& map, Paddle& pad)
 					p.x = position.x + i - 1;
 					p.y = position.y - i + 1;
 					if ((map.data[position.y - i - 1][(position.x + i - 1) / 4 - 1] == 0) && (map.data[position.y - i - 1 + 1][(position.x + i - 1) / 4] == 0))
-						direction = DOWNLEFT;
+					{
+						if ((position.x + i - 1) % 4 == 0)
+							direction = DOWNLEFT;
+						else
+						{
+							direction = DOWNRIGHT;
+						}
+					}
 					else if (map.data[position.y - i - 1][(position.x + i - 1) / 4 - 1] == 0)
 						direction = UPLEFT;
 					else if (map.data[position.y - i - 1 + 1][(position.x + i - 1) / 4] == 0)
@@ -427,7 +483,7 @@ void Ball::conllision(Map& map, Paddle& pad)
 							map.data[position.y - i - 1 + 1][(position.x + i - 1) / 4]--;
 					}
 					this->setPosition(p);
-					this->draw();
+					this->draw(bom);
 					return;
 
 				}
@@ -445,13 +501,20 @@ void Ball::conllision(Map& map, Paddle& pad)
 				this->printFill();
 				position.x = SCREEN_X - 1;
 				direction = DOWNLEFT;
-				this->draw();
+				this->draw(bom);
 				return;
 			}
 
 			//cham gach
 			if (position.y + i < 16)
 			{
+
+				if (bom)
+				{
+					map.data[position.y + i - 1][(position.x + i - 1) / 4] = 0;
+					continue;
+				}
+
 
 				switch (map.data[position.y + i - 1][(position.x + i - 1) / 4])
 				{
@@ -466,7 +529,12 @@ void Ball::conllision(Map& map, Paddle& pad)
 					p.x = position.x + i - 1;
 					p.y = position.y + i - 1;
 					if ((map.data[position.y + i - 1][(position.x + i - 1) / 4 - 1] == 0) && (map.data[position.y + i - 1 - 1][(position.x + i - 1) / 4] == 0))
-						direction = UPLEFT;
+						if ((position.x + i - 1) % 4 == 0)
+							direction = UPLEFT;
+						else
+						{
+							direction = UPRIGHT;
+						}
 					else if (map.data[position.y + i - 1][(position.x + i - 1) / 4 - 1] == 0)
 						direction = DOWNLEFT;
 					else if (map.data[position.y + i - 1 - 1][(position.x + i - 1) / 4] == 0)
@@ -479,7 +547,7 @@ void Ball::conllision(Map& map, Paddle& pad)
 							map.data[position.y + i - 1 - 1][(position.x + i - 1) / 4]--;
 					}
 					this->setPosition(p);
-					this->draw();
+					this->draw(bom);
 					return;
 
 				}
@@ -507,7 +575,7 @@ void Ball::conllision(Map& map, Paddle& pad)
 						direction = UPRIGHT;
 						break;
 					}
-					this->draw();
+					this->draw(bom);
 					i = speed;
 					if (speed < BALL_SPEED_MAX)
 						speed *= 1.1;

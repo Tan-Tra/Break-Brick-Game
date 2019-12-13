@@ -1,7 +1,7 @@
 #pragma once
 #include "Paddle.h"
 #define BALL_SPEED 1
-#define BALL_SPEED_MAX 2
+#define BALL_SPEED_MAX 1
 
 
 class Ball
@@ -18,9 +18,9 @@ public:
 	void setDirection(eDir dir);
 	vector2D getPosition();
 	eDir getDirection();
-	void draw();
+	void draw(bool& bom);
 	void printFill();
-	void move();
-	void conllision(Map& map, Paddle& pad);
+	void move(bool& bom);
+	void conllision(Map& map, Paddle& pad, bool& bom);
 };
 
