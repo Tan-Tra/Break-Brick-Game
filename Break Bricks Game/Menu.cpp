@@ -163,26 +163,26 @@ int Menu::resultMenu(int score, int level)
 
 void Menu::passLevel()
 {
-	gotoXY(25, 18);
+	gotoXY(15, 18);
 	cout << "=====================================" << endl;
-	gotoXY(25, 19);
+	gotoXY(15, 19);
 	cout << "|         CONGRATULATIONS!          |" << endl;
-	gotoXY(25, 20);
+	gotoXY(15, 20);
 	cout << "|       YOU PASS THIS LEVEL         |" << endl;
-	gotoXY(25, 21);
+	gotoXY(15, 21);
 	cout << "=====================================" << endl;
 	system("pause>nul");
 }
 
 void Menu::winGame()
 {
-	gotoXY(25, 18);
+	gotoXY(15, 18);
 	cout << "============================================" << endl;
-	gotoXY(25, 19);
+	gotoXY(15, 19);
 	cout << "|             CONGRATULATIONS!             |" << endl;
-	gotoXY(25, 20);
+	gotoXY(15, 20);
 	cout << "|     YOU ARE KING OF BREAK BRICKS GAME    |" << endl;
-	gotoXY(25, 21);
+	gotoXY(15, 21);
 	cout << "============================================" << endl;
 	system("pause>nul");
 }

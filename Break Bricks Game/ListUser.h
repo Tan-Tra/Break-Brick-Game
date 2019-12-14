@@ -10,7 +10,7 @@ private:
 	vector<User> dsuser;
 public:
 	void addUser(User& user);
-	void updateUser(string ten, int diem, int level);
+	void updateUser(string name, int diem, int level);
 	void loadFromFile();
 	void fwriteGoal();
 	void printHightScore();

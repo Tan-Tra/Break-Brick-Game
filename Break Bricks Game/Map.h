@@ -17,6 +17,8 @@ void gotoXY(int x, int y);
 void Color(int cl);
 void Nocursortype();
 
+void resizeConsole(int width, int height);
+
 struct vector2D
 {
 	int x, y;

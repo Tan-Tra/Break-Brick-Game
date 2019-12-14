@@ -40,19 +40,24 @@ eDir Ball::getDirection()
 	return direction;
 }
 
-void Ball::draw()
+void Ball::draw(bool& bom)
 {
 	gotoXY(position.x, position.y);
+	if (bom)
+	{
+		Color(13);
+	}
 	cout << 'O';
+	
+	Color(15);
 }
-
 void Ball::printFill()
 {
 	gotoXY(position.x, position.y);
 	cout << ' ';
 }
 
-void Ball::move()
+void Ball::move(bool& bom)
 {
 	printFill();
 	switch (direction)
@@ -95,11 +100,11 @@ void Ball::move()
 		}
 		break;
 	}
-	draw();
+	draw(bom);
 
 }
 
-void Ball::conllision(Map& map, Paddle& pad, int &score, int& broken_bricks)
+void Ball::conllision(Map& map, Paddle& pad, int &score, int& broken_bricks, bool& bom)
 {
 	vector2D p;
 	switch (direction)
@@ -114,13 +119,36 @@ void Ball::conllision(Map& map, Paddle& pad, int &score, int& broken_bricks)
 				this->printFill();
 				position.y = 1;
 				direction = DOWN;
-				this->draw();
+				this->draw(bom);
 				return;
 			}
 
 			//cham gach
 			if (position.y - i < 16)
 			{
+				//banh sieu cap
+				if (bom)
+				{
+					switch (map.data[position.y - 1 - i][(position.x - 1) / 4])
+					{
+						case 1:
+						{
+							score += 10;
+							broken_bricks++;
+						}break;
+						case 2:
+							score += 20;
+							broken_bricks+=2;
+							break;
+						case 7:
+							score += 30;
+							break;
+						default:
+								break;
+					}
+					map.data[position.y - 1 - i][(position.x - 1) / 4] = 0;
+					continue;
+				}
 
 				switch (map.data[position.y - 1 - i][(position.x - 1) / 4])
 				{
@@ -137,7 +165,7 @@ void Ball::conllision(Map& map, Paddle& pad, int &score, int& broken_bricks)
 					p.y = position.y - i + 1;
 					this->setPosition(p);
 					direction = DOWN;
-					this->draw();
+					this->draw(bom);
 					return;
 
 				}
@@ -152,7 +180,29 @@ void Ball::conllision(Map& map, Paddle& pad, int &score, int& broken_bricks)
 			//cham gach
 			if (position.y + i < 16)
 			{
-
+				//banh sieu cap
+				if (bom)
+				{
+					switch (map.data[position.y + i - 1][(position.x - 1) / 4])
+					{
+					case 1:
+					{
+						score += 10;
+						broken_bricks++;
+					}break;
+					case 2:
+						score += 20;
+						broken_bricks += 2;
+						break;
+					case 7:
+						score += 30;
+						break;
+					default:
+						break;
+					}
+					map.data[position.y + i - 1][(position.x - 1) / 4] = 0;
+					continue;
+				}
 				switch (map.data[position.y + i - 1][(position.x - 1) / 4])
 				{
 				case 0:
@@ -170,7 +220,7 @@ void Ball::conllision(Map& map, Paddle& pad, int &score, int& broken_bricks)
 					this->setPosition(p);
 					printFill();
 					direction = UP;
-					this->draw();
+					this->draw(bom);
 					return;
 				}
 			}
@@ -198,7 +248,7 @@ void Ball::conllision(Map& map, Paddle& pad, int &score, int& broken_bricks)
 						break;
 					}
 
-					this->draw();
+					this->draw(bom);
 					i = speed;
 					if (speed < BALL_SPEED_MAX)
 						speed *= 1.1;
@@ -219,7 +269,7 @@ void Ball::conllision(Map& map, Paddle& pad, int &score, int& broken_bricks)
 				position.x = 1;
 				position.y = 1;
 				direction = DOWNRIGHT;
-				this->draw();
+				this->draw(bom);
 				return;
 			}
 
@@ -228,7 +278,7 @@ void Ball::conllision(Map& map, Paddle& pad, int &score, int& broken_bricks)
 				this->printFill();
 				position.x = 1;
 				direction = UPRIGHT;
-				this->draw();
+				this->draw(bom);
 				return;
 			}
 
@@ -237,14 +287,36 @@ void Ball::conllision(Map& map, Paddle& pad, int &score, int& broken_bricks)
 				this->printFill();
 				position.y = 1;
 				direction = DOWNLEFT;
-				this->draw();
+				this->draw(bom);
 				return;
 			}
 
 			//cham gach
 			if (position.y - i < 16)
 			{
-
+				//banh sieu cap
+				if (bom)
+				{
+					switch (map.data[position.y - i - 1][(position.x - i - 1) / 4])
+					{
+					case 1:
+					{
+						score += 10;
+						broken_bricks++;
+					}break;
+					case 2:
+						score += 20;
+						broken_bricks += 2;
+						break;
+					case 7:
+						score += 30;
+						break;
+					default:
+						break;
+					}
+					map.data[position.y - i - 1][(position.x - i - 1) / 4] = 0;
+					continue;
+				}
 				switch (map.data[position.y - i - 1][(position.x - i - 1) / 4])
 				{
 				case 0:
@@ -274,12 +346,22 @@ void Ball::conllision(Map& map, Paddle& pad, int &score, int& broken_bricks)
 					else
 					{
 						if (map.data[position.y - i - 1][(position.x - i - 1) / 4 + 1] != 7)
+						{
 							map.data[position.y - i - 1][(position.x - i - 1) / 4 + 1]--;
+							broken_bricks++;
+							score += 10;
+						}
+						
 						if (map.data[position.y - i - 1 + 1][(position.x - i - 1) / 4] != 7)
+						{
 							map.data[position.y - i - 1 + 1][(position.x - i - 1) / 4]--;
+							broken_bricks++;
+							score += 10;
+						}
+							
 					}
 					this->setPosition(p);
-					this->draw();
+					this->draw(bom);
 					return;
 
 				}
@@ -297,14 +379,36 @@ void Ball::conllision(Map& map, Paddle& pad, int &score, int& broken_bricks)
 				this->printFill();
 				position.x = 1;
 				direction = DOWNRIGHT;
-				this->draw();
+				this->draw(bom);
 				return;
 			}
 
 			//cham gach
 			if (position.y + i < 16)
 			{
-
+				//banh sieu cap
+				if (bom)
+				{
+					switch (map.data[position.y + i - 1][(position.x - i - 1) / 4])
+					{
+					case 1:
+					{
+						score += 10;
+						broken_bricks++;
+					}break;
+					case 2:
+						score += 20;
+						broken_bricks += 2;
+						break;
+					case 7:
+						score += 30;
+						break;
+					default:
+						break;
+					}
+					map.data[position.y + i - 1][(position.x - i - 1) / 4] = 0;
+					continue;
+				}
 				switch (map.data[position.y + i - 1][(position.x - i - 1) / 4])
 				{
 				case 0:
@@ -335,12 +439,20 @@ void Ball::conllision(Map& map, Paddle& pad, int &score, int& broken_bricks)
 					else
 					{
 						if (map.data[position.y + i - 1][(position.x - i - 1) / 4 + 1] != 7)
+						{
 							map.data[position.y + i - 1][(position.x - i - 1) / 4 + 1]--;
-						if (map.data[position.y + i - 1 - 1][(position.x - i - 1) / 4] != 7)
+							broken_bricks++;
+							score += 10;
+						}
+						if (map.data[position.y + i - 1 - 1][(position.x - i - 1) / 4] != 7) 
+						{
 							map.data[position.y + i - 1 - 1][(position.x - i - 1) / 4]--;
+							broken_bricks++;
+							score += 10;
+						}
 					}
 					this->setPosition(p);
-					this->draw();
+					this->draw(bom);
 					return;
 
 				}
@@ -368,7 +480,7 @@ void Ball::conllision(Map& map, Paddle& pad, int &score, int& broken_bricks)
 						direction = UPRIGHT;
 						break;
 					}
-					this->draw();
+					this->draw(bom);
 					i = speed;
 					if (speed < BALL_SPEED_MAX)
 						speed *= 1.1;
@@ -390,7 +502,7 @@ void Ball::conllision(Map& map, Paddle& pad, int &score, int& broken_bricks)
 				position.x = SCREEN_X - 1;
 				position.y = 1;
 				direction = DOWNLEFT;
-				this->draw();
+				this->draw(bom);
 				return;
 			}
 
@@ -399,7 +511,7 @@ void Ball::conllision(Map& map, Paddle& pad, int &score, int& broken_bricks)
 				this->printFill();
 				position.x = SCREEN_X - 1;
 				direction = UPLEFT;
-				this->draw();
+				this->draw(bom);
 				return;
 
 			}
@@ -409,14 +521,36 @@ void Ball::conllision(Map& map, Paddle& pad, int &score, int& broken_bricks)
 				this->printFill();
 				position.y = 1;
 				direction = DOWNRIGHT;
-				this->draw();
+				this->draw(bom);
 				return;
 			}
 
 			//cham gach
 			if (position.y - i < 16)
 			{
-
+				//banh sieu cap
+				if (bom)
+				{
+					switch (map.data[position.y - i - 1][(position.x + i - 1) / 4])
+					{
+					case 1:
+					{
+						score += 10;
+						broken_bricks++;
+					}break;
+					case 2:
+						score += 20;
+						broken_bricks += 2;
+						break;
+					case 7:
+						score += 30;
+						break;
+					default:
+						break;
+					}
+					map.data[position.y - i - 1][(position.x + i - 1) / 4] = 0;
+					continue;
+				}
 				switch (map.data[position.y - i - 1][(position.x + i - 1) / 4])
 				{
 				case 0:
@@ -447,12 +581,22 @@ void Ball::conllision(Map& map, Paddle& pad, int &score, int& broken_bricks)
 					else
 					{
 						if (map.data[position.y - i - 1][(position.x + i - 1) / 4 - 1] != 7)
+						{
 							map.data[position.y - i - 1][(position.x + i - 1) / 4 - 1]--;
+							broken_bricks++;
+							score += 10;
+						}
+							
 						if (map.data[position.y - i - 1 + 1][(position.x + i - 1) / 4] != 7)
+						{
 							map.data[position.y - i - 1 + 1][(position.x + i - 1) / 4]--;
+							broken_bricks++;
+							score += 10;
+						}
+						
 					}
 					this->setPosition(p);
-					this->draw();
+					this->draw(bom);
 					return;
 
 				}
@@ -470,14 +614,36 @@ void Ball::conllision(Map& map, Paddle& pad, int &score, int& broken_bricks)
 				this->printFill();
 				position.x = SCREEN_X - 1;
 				direction = DOWNLEFT;
-				this->draw();
+				this->draw(bom);
 				return;
 			}
 
 			//cham gach
 			if (position.y + i < 16)
 			{
-
+				//banh sieu cap
+				if (bom)
+				{
+					switch (map.data[position.y + i - 1][(position.x + i - 1) / 4])
+					{
+					case 1:
+					{
+						score += 10;
+						broken_bricks++;
+					}break;
+					case 2:
+						score += 20;
+						broken_bricks += 2;
+						break;
+					case 7:
+						score += 30;
+						break;
+					default:
+						break;
+					}
+					map.data[position.y + i - 1][(position.x + i - 1) / 4] = 0;
+					continue;
+				}
 				switch (map.data[position.y + i - 1][(position.x + i - 1) / 4])
 				{
 				case 0:
@@ -506,12 +672,22 @@ void Ball::conllision(Map& map, Paddle& pad, int &score, int& broken_bricks)
 					else
 					{
 						if (map.data[position.y + i - 1][(position.x + i - 1) / 4 - 1] != 7)
+						{
 							map.data[position.y + i - 1][(position.x + i - 1) / 4 - 1]--;
+							broken_bricks++;
+							score += 10;
+						}
+							
 						if (map.data[position.y + i - 1 - 1][(position.x + i - 1) / 4] != 7)
+						{
+
 							map.data[position.y + i - 1 - 1][(position.x + i - 1) / 4]--;
+							broken_bricks++;
+							score += 10;
+						}
 					}
 					this->setPosition(p);
-					this->draw();
+					this->draw(bom);
 					return;
 
 				}
@@ -539,7 +715,7 @@ void Ball::conllision(Map& map, Paddle& pad, int &score, int& broken_bricks)
 						direction = UPRIGHT;
 						break;
 					}
-					this->draw();
+					this->draw(bom);
 					i = speed;
 					if (speed < BALL_SPEED_MAX)
 						speed *= 1.1;
@@ -553,7 +729,7 @@ void Ball::conllision(Map& map, Paddle& pad, int &score, int& broken_bricks)
 	}
 }
 
-void Ball::resset()
+void Ball::reset()
 {
 	position.x = SCREEN_X / 2;
 	position.y = SCREEN_Y - 3;

@@ -7,7 +7,7 @@
 
 void main()
 {
-	bool isPlay = PlaySound("PongMusic", NULL, SND_ASYNC);
+
 	
 	Nocursortype();
 	GameManager breakBricks;

@@ -15,7 +15,7 @@ void Player::getInfor()
 	gotoXY(30 + 7, 15);
 	cout << "=======================================";
 	gotoXY(30 + 25, 14);
-	cin >> ten;
+	cin >> name;
 }
 
 void Player::printMenuScore()
@@ -39,12 +39,13 @@ void Player::printMenuScore()
 	cout << "|                                     |";
 	gotoXY(68 + 7, 19);
 	cout << "=======================================";
-	gotoXY(68 + 17, 12);
+	gotoXY(68 + 23-name.length()/2, 12);
 	Color(14);
-	cout << "BREAK BRICKS GAME";
+	cout <<name;
 	gotoXY(68 + 10, 15);
 	cout << "SCORE: ";
-	gotoXY(SCREEN_X + 2, SCREEN_Y+1);
+	gotoXY(68 + 10, 18);
+	cout << "LEVEL: " << level;
 }
 
 void Player::printScore()
@@ -57,16 +58,17 @@ int Player::fread()
 {
 	getInfor();
 	
-	fstream f(ten + ".txt");
+	fstream f(name + ".txt");
 	if (f.fail()) return - 1;
 	f >> score >> level;
 	map.fread(f);
+
 	return 1;
 }
 
 void Player::fwrite()
 {
-	fstream f(ten+".txt", ios::out);
+	fstream f(name+".txt", ios::out);
 	if (f.fail()) return;
 	f << score << " " << level << "\n";
 	map.fwrite(f);

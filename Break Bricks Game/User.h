@@ -7,18 +7,18 @@ using namespace std;
 class User
 {
 private:
-	string ten; int diem, level;
+	string name; int diem, level;
 public:
-	User() { ten = ""; diem = level = 0; }
+	User() { name = ""; diem = level = 0; }
 	User(const User& u)
 	{
-		ten = u.ten;
+		name = u.name;
 		diem = u.diem;
 		level = u.level;
 	}
-	User(string ten, int diem, int level)
+	User(string name, int diem, int level)
 	{
-		this->ten = ten;
+		this->name = name;
 		this->diem = diem;
 		this->level = level;
 	}
@@ -29,7 +29,7 @@ public:
 	}
 	string getTen()
 	{
-		return ten;
+		return name;
 	}
 	int getDiem()
 	{

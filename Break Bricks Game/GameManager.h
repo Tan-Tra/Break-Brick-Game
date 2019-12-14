@@ -1,9 +1,11 @@
+#pragma comment(lib, "winmm.lib")
 #ifndef _GAMEMANAGER_H_
 #define _GAMEMANAGER_H_
 #include "Ball.h"
 #include"Player.h"
 #include"ListUser.h"
 #include"Menu.h"
+#include"Item.h"
 class GameManager
 {
 private:

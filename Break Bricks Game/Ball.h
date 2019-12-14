@@ -18,10 +18,10 @@ public:
 	void setDirection(eDir dir);
 	vector2D getPosition();
 	eDir getDirection();
-	void draw();
+	void draw(bool& bom);
 	void printFill();
-	void move();
-	void conllision(Map& map, Paddle& pad, int& score, int& broken_bricks);
-	void resset();
+	void move(bool& bom);
+	void conllision(Map& map, Paddle& pad, int& score, int& broken_bricks, bool& bom);
+	void reset();
 };
 

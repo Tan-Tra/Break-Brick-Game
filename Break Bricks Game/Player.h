@@ -5,7 +5,7 @@ class Player
 public:
 	Map map;
 	int score,level;
-	string ten;
+	string name;
 	int broken_bricks;
 	void getInfor();
 	void printMenuScore();

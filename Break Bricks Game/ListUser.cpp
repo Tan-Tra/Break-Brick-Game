@@ -6,16 +6,20 @@ void ListUser::addUser(User& user)
 		dsuser.push_back(user);
 }
 
-void ListUser::updateUser(string ten, int diem, int level)
+void ListUser::updateUser(string name, int diem, int level)
 {
 	for (int i = 0; i < dsuser.size(); i++)
 	{
-		if (dsuser[i].getTen() == ten)
+		if (dsuser[i].getTen() == name)
 		{
 			dsuser[i].setLevel(level);
 			dsuser[i].setDiem(diem);
+			return;
 		}
 	}
+	User* user = new User(name, diem, level);
+	if (user->getTen() != "")
+		dsuser.push_back(*user);
 }
 
 void ListUser::loadFromFile()
@@ -27,9 +31,9 @@ void ListUser::loadFromFile()
 	}
 	while (!f.eof())
 	{
-		string ten;  int level, diem;
-		f >> ten >> diem >> level;
-		User* a = new User(ten, diem, level);
+		string name;  int level, diem;
+		f >> name >> diem >> level;
+		User* a = new User(name, diem, level);
 		if(a->getTen()!="")
 			dsuser.push_back(*a);
 		delete a;
@@ -82,7 +86,7 @@ void ListUser::printHightScore()
 	{
 		gotoXY(44, 11 + i);
 		cout << dsuser[i].getTen();
-		gotoXY(84, 11 + i);
+		gotoXY(80, 11 + i);
 		cout << dsuser[i].getDiem();
 	}
 }
