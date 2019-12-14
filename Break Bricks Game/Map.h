@@ -5,10 +5,11 @@
 #include<vector>
 #include<fstream>
 #include<Windows.h>
+#include<time.h>
 using namespace std;
 
-#define SCREEN_X 62
-#define SCREEN_Y 30
+#define SCREEN_X 61
+#define SCREEN_Y 40
 
 void gotoXY(int x, int y);
 
@@ -23,11 +24,16 @@ struct vector2D
 
 class Map
 {
+protected:
+
 public:
 	int data[15][15];
 	int level;
+	int bricks;
 	void printMap();
-	void freadMap();
+	int freadMap(int level);
+	int fread(fstream& f);
+	void fwrite(fstream& f);
 	void drawWall();
 };
 

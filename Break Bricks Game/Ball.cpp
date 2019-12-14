@@ -44,14 +44,12 @@ void Ball::draw()
 {
 	gotoXY(position.x, position.y);
 	cout << 'O';
-	gotoXY(SCREEN_X + 2, SCREEN_Y + 2);
 }
 
 void Ball::printFill()
 {
 	gotoXY(position.x, position.y);
 	cout << ' ';
-	gotoXY(SCREEN_X + 2, SCREEN_Y + 2);
 }
 
 void Ball::move()
@@ -59,40 +57,49 @@ void Ball::move()
 	printFill();
 	switch (direction)
 	{
-	case LEFT:
-		position.x -= (int)speed;
-		break;
-	case RIGHT:
-		position.x += (int)speed;
-		break;
 	case UP:
-		position.y -= (int)speed;
+		if (position.y - (int)speed >= 1)
+		{
+			position.y -= (int)speed;
+		}
 		break;
 	case DOWN:
 		position.y += (int)speed;
 		break;
 	case UPLEFT:
-		position.x -= (int)speed;
-		position.y -= (int)speed;
+		if (position.x - (int)speed >= 1 && position.y - (int)speed >= 1)
+		{
+			position.x -= (int)speed;
+			position.y -= (int)speed;
+		}
 		break;
 	case DOWNLEFT:
-		position.x -= (int)speed;
-		position.y += (int)speed;
+		if (position.x - (int)speed >= 1)
+		{
+			position.x -= (int)speed;
+			position.y += (int)speed;
+		}
 		break;
 	case UPRIGHT:
-		position.x += (int)speed;
-		position.y -= (int)speed;
+		if (position.x + (int)speed <= SCREEN_X - 1 && position.y - (int)speed >= 1)
+		{
+			position.x += (int)speed;
+			position.y -= (int)speed;
+		}
 		break;
 	case DOWNRIGHT:
-		position.x += (int)speed;
-		position.y += (int)speed;
+		if (position.x + (int)speed <= SCREEN_X - 1)
+		{
+			position.x += (int)speed;
+			position.y += (int)speed;
+		}
 		break;
 	}
 	draw();
 
 }
 
-void Ball::conllision(Map& map, Paddle& pad)
+void Ball::conllision(Map& map, Paddle& pad, int &score, int& broken_bricks)
 {
 	vector2D p;
 	switch (direction)
@@ -102,7 +109,7 @@ void Ball::conllision(Map& map, Paddle& pad)
 		for (int i = 1; i <= speed; i++)
 		{
 			//cham tuong
-			if (position.y - i <= 1)
+			if (position.y - i < 1)
 			{
 				this->printFill();
 				position.y = 1;
@@ -112,21 +119,22 @@ void Ball::conllision(Map& map, Paddle& pad)
 			}
 
 			//cham gach
-			if (position.y-i < 16)
+			if (position.y - i < 16)
 			{
 
-				switch (map.data[position.y - 1 - i][(position.x - 1)/4])
+				switch (map.data[position.y - 1 - i][(position.x - 1) / 4])
 				{
 				case 0:
 					break;
 				case 1:
 				case 2:
 					map.data[position.y - 1 - i][(position.x - 1) / 4]--;
-				
+					score += 10;
+					broken_bricks++;
 				case 7:
 					this->printFill();
 					p.x = position.x;
-					p.y = position.y - i+1;
+					p.y = position.y - i + 1;
 					this->setPosition(p);
 					direction = DOWN;
 					this->draw();
@@ -142,22 +150,23 @@ void Ball::conllision(Map& map, Paddle& pad)
 		for (int i = 1; i <= speed; i++)
 		{
 			//cham gach
-			if (position.y+i < 16)
+			if (position.y + i < 16)
 			{
 
-				switch (map.data[position.y + i-1][(position.x - 1)/4])
+				switch (map.data[position.y + i - 1][(position.x - 1) / 4])
 				{
 				case 0:
 					break;
 				case 1:
 				case 2:
 					map.data[position.y + i - 1][(position.x - 1) / 4]--;
-
+					score += 10;
+					broken_bricks++;
 				case 7:
-					
+
 					this->printFill();
 					p.x = position.x;
-					p.y = position.y + i-1;
+					p.y = position.y + i - 1;
 					this->setPosition(p);
 					printFill();
 					direction = UP;
@@ -204,7 +213,7 @@ void Ball::conllision(Map& map, Paddle& pad)
 		for (int i = 1; i <= speed; i++)
 		{
 			//cham tuong
-			if (position.x - i <= 1 && position.y - i <= 1)
+			if (position.x - i < 1 && position.y - i < 1)
 			{
 				this->printFill();
 				position.x = 1;
@@ -214,7 +223,7 @@ void Ball::conllision(Map& map, Paddle& pad)
 				return;
 			}
 
-			if (position.x - i <= 1)
+			if (position.x - i < 1)
 			{
 				this->printFill();
 				position.x = 1;
@@ -223,7 +232,7 @@ void Ball::conllision(Map& map, Paddle& pad)
 				return;
 			}
 
-			if (position.y - i <= 1)
+			if (position.y - i < 1)
 			{
 				this->printFill();
 				position.y = 1;
@@ -233,26 +242,42 @@ void Ball::conllision(Map& map, Paddle& pad)
 			}
 
 			//cham gach
-			if (position.y-i < 16)
+			if (position.y - i < 16)
 			{
 
-				switch (map.data[position.y - i-1][(position.x - i - 1)/4])
+				switch (map.data[position.y - i - 1][(position.x - i - 1) / 4])
 				{
 				case 0:
 					break;
 				case 1:
 				case 2:
 					map.data[position.y - i - 1][(position.x - i - 1) / 4]--;
+					score += 10;
+					broken_bricks++;
 				case 7:
 					this->printFill();
-					p.x = position.x - i+1;
-					p.y = position.y - i+1;
-					if ((map.data[position.y - i-1][(position.x - i - 1) / 4 + 1] == 0) == (map.data[position.y - i - 1 +1][(position.x - i - 1) / 4] == 0))
-						direction = DOWNRIGHT;
+					p.x = position.x - i + 1;
+					p.y = position.y - i + 1;
+					if ((map.data[position.y - i - 1][(position.x - i - 1) / 4 + 1] == 0) && (map.data[position.y - i - 1 + 1][(position.x - i - 1) / 4] == 0))
+					{
+						if ((position.x - i - 1) % 4 == 3)
+							direction = DOWNRIGHT;
+						else
+						{
+							direction = DOWNLEFT;
+						}
+					}
 					else if (map.data[position.y - i - 1][(position.x - i - 1) / 4 + 1] == 0)
 						direction = UPRIGHT;
-					else
+					else if (map.data[position.y - i - 1 + 1][(position.x - i - 1) / 4] == 0)
 						direction = DOWNLEFT;
+					else
+					{
+						if (map.data[position.y - i - 1][(position.x - i - 1) / 4 + 1] != 7)
+							map.data[position.y - i - 1][(position.x - i - 1) / 4 + 1]--;
+						if (map.data[position.y - i - 1 + 1][(position.x - i - 1) / 4] != 7)
+							map.data[position.y - i - 1 + 1][(position.x - i - 1) / 4]--;
+					}
 					this->setPosition(p);
 					this->draw();
 					return;
@@ -267,7 +292,7 @@ void Ball::conllision(Map& map, Paddle& pad)
 		for (int i = 1; i <= speed; i++)
 		{
 			//cham tuong
-			if (position.x - i <= 1)
+			if (position.x - i < 1)
 			{
 				this->printFill();
 				position.x = 1;
@@ -277,10 +302,10 @@ void Ball::conllision(Map& map, Paddle& pad)
 			}
 
 			//cham gach
-			if (position.y+i < 16)
+			if (position.y + i < 16)
 			{
 
-				switch (map.data[position.y + i-1][(position.x - i - 1)/4])
+				switch (map.data[position.y + i - 1][(position.x - i - 1) / 4])
 				{
 				case 0:
 					break;
@@ -288,17 +313,32 @@ void Ball::conllision(Map& map, Paddle& pad)
 
 				case 2:
 					map.data[position.y + i - 1][(position.x - i - 1) / 4]--;
-
+					score += 10;
+					broken_bricks++;
 				case 7:
 					this->printFill();
-					p.x = position.x - i+1;
-					p.y = position.y + i-1;
-					if ((map.data[position.y + i - 1][(position.x - i - 1) / 4+1] == 0) == (map.data[position.y + i - 1-1][(position.x - i - 1) / 4] == 0))
+					p.x = position.x - i + 1;
+					p.y = position.y + i - 1;
+					if ((map.data[position.y + i - 1][(position.x - i - 1) / 4 + 1] == 0) && (map.data[position.y + i - 1 - 1][(position.x - i - 1) / 4] == 0))
+					{
+						if ((position.x - i - 1) % 4==3)
 						direction = UPRIGHT;
+						else
+						{
+							direction = UPLEFT;
+						}
+					}
 					else if (map.data[position.y + i - 1][(position.x - i - 1) / 4 + 1] == 0)
 						direction = DOWNRIGHT;
-					else
+					else if (map.data[position.y + i - 1 - 1][(position.x - i - 1) / 4] == 0)
 						direction = UPLEFT;
+					else
+					{
+						if (map.data[position.y + i - 1][(position.x - i - 1) / 4 + 1] != 7)
+							map.data[position.y + i - 1][(position.x - i - 1) / 4 + 1]--;
+						if (map.data[position.y + i - 1 - 1][(position.x - i - 1) / 4] != 7)
+							map.data[position.y + i - 1 - 1][(position.x - i - 1) / 4]--;
+					}
 					this->setPosition(p);
 					this->draw();
 					return;
@@ -344,7 +384,7 @@ void Ball::conllision(Map& map, Paddle& pad)
 		{
 
 			//cham tuong
-			if (position.x + i >= SCREEN_X - 1 && position.y - i <= 1)
+			if (position.x + i > SCREEN_X - 1 && position.y - i < 1)
 			{
 				this->printFill();
 				position.x = SCREEN_X - 1;
@@ -354,7 +394,7 @@ void Ball::conllision(Map& map, Paddle& pad)
 				return;
 			}
 
-			if (position.x + i >= SCREEN_X - 1)
+			if (position.x + i > SCREEN_X - 1)
 			{
 				this->printFill();
 				position.x = SCREEN_X - 1;
@@ -364,7 +404,7 @@ void Ball::conllision(Map& map, Paddle& pad)
 
 			}
 
-			if (position.y - i <= 1)
+			if (position.y - i < 1)
 			{
 				this->printFill();
 				position.y = 1;
@@ -374,28 +414,43 @@ void Ball::conllision(Map& map, Paddle& pad)
 			}
 
 			//cham gach
-			if (position.y-i < 16)
+			if (position.y - i < 16)
 			{
 
-				switch (map.data[position.y - i-1][(position.x + i - 1)/4])
+				switch (map.data[position.y - i - 1][(position.x + i - 1) / 4])
 				{
 				case 0:
 					break;
 				case 1:
-					
+
 				case 2:
-			
+					score += 10;
+					broken_bricks++;
 					map.data[position.y - i - 1][(position.x + i - 1) / 4]--;
 				case 7:
 					this->printFill();
-					p.x = position.x + i-1;
-					p.y = position.y - i+1;
-					if ((map.data[position.y - i - 1][(position.x + i - 1) / 4-1] == 0) == (map.data[position.y - i - 1+1][(position.x + i - 1) / 4] == 0))
-						direction = DOWNLEFT;
+					p.x = position.x + i - 1;
+					p.y = position.y - i + 1;
+					if ((map.data[position.y - i - 1][(position.x + i - 1) / 4 - 1] == 0) && (map.data[position.y - i - 1 + 1][(position.x + i - 1) / 4] == 0))
+					{
+						if ((position.x + i - 1) % 4 == 0)
+							direction = DOWNLEFT;
+						else
+						{
+							direction = DOWNRIGHT;
+						}
+					}
 					else if (map.data[position.y - i - 1][(position.x + i - 1) / 4 - 1] == 0)
 						direction = UPLEFT;
-					else
+					else if (map.data[position.y - i - 1 + 1][(position.x + i - 1) / 4] == 0)
 						direction = DOWNRIGHT;
+					else
+					{
+						if (map.data[position.y - i - 1][(position.x + i - 1) / 4 - 1] != 7)
+							map.data[position.y - i - 1][(position.x + i - 1) / 4 - 1]--;
+						if (map.data[position.y - i - 1 + 1][(position.x + i - 1) / 4] != 7)
+							map.data[position.y - i - 1 + 1][(position.x + i - 1) / 4]--;
+					}
 					this->setPosition(p);
 					this->draw();
 					return;
@@ -410,7 +465,7 @@ void Ball::conllision(Map& map, Paddle& pad)
 		for (int i = 1; i <= speed; i++)
 		{
 			//cham tuong
-			if (position.x + i >= SCREEN_X - 1)
+			if (position.x + i > SCREEN_X - 1)
 			{
 				this->printFill();
 				position.x = SCREEN_X - 1;
@@ -420,27 +475,41 @@ void Ball::conllision(Map& map, Paddle& pad)
 			}
 
 			//cham gach
-			if (position.y+i < 16)
+			if (position.y + i < 16)
 			{
 
-				switch (map.data[position.y + i-1][(position.x + i - 1)/4])
+				switch (map.data[position.y + i - 1][(position.x + i - 1) / 4])
 				{
 				case 0:
 					break;
 				case 1:
-					
+
 				case 2:
-					map.data[position.y + i - 1][(position.x + i - 1)/4]--;
+					score += 10;
+					broken_bricks++;
+					map.data[position.y + i - 1][(position.x + i - 1) / 4]--;
 				case 7:
 					this->printFill();
-					p.x = position.x + i-1;
-					p.y = position.y + i-1;
-					if ((map.data[position.y + i - 1][(position.x + i - 1) / 4-1] == 0) == (map.data[position.y + i - 1-1][(position.x + i - 1) / 4] == 0))
-						direction = UPLEFT;
+					p.x = position.x + i - 1;
+					p.y = position.y + i - 1;
+					if ((map.data[position.y + i - 1][(position.x + i - 1) / 4 - 1] == 0) && (map.data[position.y + i - 1 - 1][(position.x + i - 1) / 4] == 0))
+						if ((position.x + i - 1) % 4 == 0)
+							direction = UPLEFT;
+						else
+						{
+							direction = UPRIGHT;
+						}
 					else if (map.data[position.y + i - 1][(position.x + i - 1) / 4 - 1] == 0)
 						direction = DOWNLEFT;
-					else
+					else if (map.data[position.y + i - 1 - 1][(position.x + i - 1) / 4] == 0)
 						direction = UPRIGHT;
+					else
+					{
+						if (map.data[position.y + i - 1][(position.x + i - 1) / 4 - 1] != 7)
+							map.data[position.y + i - 1][(position.x + i - 1) / 4 - 1]--;
+						if (map.data[position.y + i - 1 - 1][(position.x + i - 1) / 4] != 7)
+							map.data[position.y + i - 1 - 1][(position.x + i - 1) / 4]--;
+					}
 					this->setPosition(p);
 					this->draw();
 					return;
@@ -482,6 +551,14 @@ void Ball::conllision(Map& map, Paddle& pad)
 		}
 		break;
 	}
+}
+
+void Ball::resset()
+{
+	position.x = SCREEN_X / 2;
+	position.y = SCREEN_Y - 3;
+	speed = BALL_SPEED;
+	direction = STOP;
 }
 
 

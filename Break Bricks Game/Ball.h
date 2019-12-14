@@ -21,6 +21,7 @@ public:
 	void draw();
 	void printFill();
 	void move();
-	void conllision(Map& map, Paddle& pad);
+	void conllision(Map& map, Paddle& pad, int& score, int& broken_bricks);
+	void resset();
 };
 

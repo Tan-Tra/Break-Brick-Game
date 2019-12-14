@@ -1,21 +1,15 @@
+#pragma comment(lib, "winmm.lib")
 #include "GameManager.h"
-#include"Player.h"
-#include"Menu.h"
 
-#include <ctime>
+
+
 
 
 void main()
 {
-
-	startMenu();
-	Nocursortype();
-	Map map;
-	map.freadMap();
-	map.drawWall();
-	map.printMap();
-	bool playing = true;
-	play(map, playing);
+	bool isPlay = PlaySound("PongMusic", NULL, SND_ASYNC);
 	
-
+	Nocursortype();
+	GameManager breakBricks;
+	breakBricks.runGame();
 }

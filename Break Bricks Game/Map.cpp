@@ -1,5 +1,6 @@
 ﻿#include "Map.h"
-
+#define _CRT_SECURE_N0_WARNINGS
+#define _CRT_SECURE_N0_WARNINGS
 void Color(int cl)// hàm thay đổi màu sắc chữ
 {
 	//hàm tham khảo tiêu chuẩn
@@ -14,7 +15,7 @@ void changeColor(int x, int y)
 	Color(10);
 	cout << "\xDB";
 	Color(15);
-	gotoXY(SCREEN_X + 2, SCREEN_Y + 2);
+	
 }
 
 void Map::printMap()
@@ -29,7 +30,7 @@ void Map::printMap()
 			{
 			case 7:
 			{
-				Color(8);
+				Color(12);
 			}break;
 			case 1:
 			{
@@ -43,7 +44,7 @@ void Map::printMap()
 				break;
 			}
 			if (data[i][j] != 0)
-				cout << "\xDB\xDB\xDB\xDB";
+				cout << "\xB2\xB2\xB2\xB2";
 			else cout << "    ";
 			Color(15);
 		}
@@ -52,21 +53,45 @@ void Map::printMap()
 	}
 }
 
-void Map::freadMap()
+int Map::freadMap(int level)
 {
-	fstream f("Map4.txt");
+	char* intStr = new char;
+	_itoa(level, intStr, 10);
+	string str = string(intStr);
+	string tenfile = "Map" + str + ".txt";
+	
+	fstream f(tenfile);
 	if (f.fail())
 	{
-		return;
+		return-1 ;
 	}
+	return fread(f);
+}
 
+int Map::fread(fstream& f)
+{
+	bricks = 0;
 	for (int i = 0; i < 15; i++)
 	{
 		for (int j = 0; j < 15; j++)
 		{
 			f >> data[i][j];
+			if (data[i][j] == 1) bricks++;
+			else if (data[i][j] == 2) bricks += 2;
 		}
+	}
+	return bricks;
+}
 
+void Map::fwrite(fstream& f)
+{
+	for (int i = 0; i < 15; i++)
+	{
+		for (int j = 0; j < 15; j++)
+		{
+			f << data[i][j]<<" ";
+		}
+		f << "\n";
 	}
 }
 
@@ -74,7 +99,7 @@ void Map::drawWall()
 {
 	//vẽ tường trên
 	for (int i = 0; i < SCREEN_X + 1; i++)
-		cout << "\xB2";
+		cout << "\xDB";
 	cout << endl;
 	for (int i = 0; i < SCREEN_Y; i++)
 	{
@@ -82,11 +107,11 @@ void Map::drawWall()
 		{
 			// vẽ tường trái
 			if (j == 0)
-				cout << "\xB2";
+				cout << "\xDB";
 
 			// vẽ tường phải
 			else if (j == SCREEN_X)
-				cout << "\xB2";
+				cout << "\xDB";
 			else cout << " ";
 		}
 		cout << endl;
@@ -94,7 +119,7 @@ void Map::drawWall()
 
 	//vễ tường dưới
 	for (int i = 0; i < SCREEN_X + 1; i++)
-		cout << "_";
+		cout << "^";
 	cout << endl;
 }
 

@@ -6,11 +6,11 @@ public:
 	Map map;
 	int score,level;
 	string ten;
-
+	int broken_bricks;
+	void getInfor();
 	void printMenuScore();
 	void printScore();
-	Map getMap();
-	void fread();
+	int fread();
 	void fwrite();
 };
 

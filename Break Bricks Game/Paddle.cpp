@@ -38,6 +38,8 @@ void Paddle::moveLeft()
 	{
 		this->drawFill();
 		position.x -= PADDLE_SPEED;
+		if (position.x - size <= 1)
+			position.x = size + 1;
 		this->draw();
 	}
 }
@@ -48,6 +50,8 @@ void Paddle::moveRight()
 	{
 		this->drawFill();
 		position.x += PADDLE_SPEED;
+		if (position.x + size >= SCREEN_X - 1)
+			position.x = SCREEN_X - size;
 		this->draw();
 	}
 }
@@ -70,4 +74,10 @@ void Paddle::drawFill()
 		cout << " ";
 	}
 	gotoXY(SCREEN_X + 2, SCREEN_Y + 2);
+}
+
+void Paddle::reset()
+{
+	position.x = SCREEN_X / 2;
+	position.y = SCREEN_Y - 2;
 }

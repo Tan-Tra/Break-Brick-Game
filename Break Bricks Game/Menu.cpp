@@ -1,7 +1,7 @@
 ﻿#include  "Menu.h "
 
 
-void printTitle()
+void Menu::printTitle()
 {
 		Color(14);
 		gotoXY(0, 10);
@@ -28,37 +28,41 @@ void printTitle()
 		cout << "  88888888P    88           ` Ybbd8 '  ` 8bbdP Y8  88   `Y8a      88888888P    88          88   ""Ybbd8 '   88   `Y8a   'YbbdPa''";
 		gotoXY(50, 25);
 		system("pause");
+		system("cls");
 }
 
-int startMenu()
+int Menu::startMenu()
 {
 	int lenh;
 	Color(14);
-	gotoXY(37, 7);
+	gotoXY(30, 7);
 	cout << "================================================================" << endl;
-	gotoXY(37, 8);
+	gotoXY(30, 8);
 	cout << "|                       BREAK BRICKS GAME                      |" << endl;
-	gotoXY(37, 9); 
+	gotoXY(30, 9); 
 	cout << "================================================================" << endl;
-	gotoXY(37, 10);
-	cout << "|           1. PLAY                                            |" << endl;
-	gotoXY(37, 11);
+	gotoXY(30, 10);
+	cout << "|           1. NEW GAME                                        |" << endl;
+	gotoXY(30, 11);
 	cout << "|           2. RESUME                                          |" << endl;
-	gotoXY(37, 12);
+	gotoXY(30, 12);
 	cout << "|           3. AUTO PLAY                                       |" << endl;
-	gotoXY(37, 13);
-	cout << "|           4. HOW TO PLAY                                     |" << endl;
-	gotoXY(37, 14);
-	cout << "|           5. QUIT GAME                                       |" << endl;
-	gotoXY(37, 15);
+	gotoXY(30, 13);
+	cout << "|           4. HIGHTSCORE                                      |" << endl;
+	gotoXY(30, 14);
+	cout << "|           5. HOW TO PLAY                                     |" << endl;
+	gotoXY(30, 15);
+	cout << "|           0. QUIT GAME                                       |" << endl;
+	gotoXY(30, 16);
 	cout << "================================================================" << endl;
-	gotoXY(37, 16);
+	gotoXY(30, 17);
 	cout << "YOUR CHOICE: ";
 	cin >> lenh;
+	cin.ignore();
 	return lenh;
 }
 
-void textLevel(int level)
+void Menu::textLevel(int level)
 {
 	switch (level)
 	{
@@ -119,7 +123,7 @@ void textLevel(int level)
 
 }
 
-int resultMenu(int score, int level)
+int Menu::resultMenu(int score, int level)
 {
 	switch (level)
 	{
@@ -145,14 +149,44 @@ int resultMenu(int score, int level)
 	gotoXY(44, 17);
 	cout << "|           1. REPLAY              |";
 	gotoXY(44, 18);
-	cout << "|           2. QUIT GAME           |";
+	cout << "|           0. QUIT GAME           |";
 	gotoXY(44, 19); 
 	cout << "====================================";
 	gotoXY(44, 20);
-	cout << "YOUR CHOICE: "; cin >> lenh;
-	system("pause>nul");
+	cout << "YOUR CHOICE:                 ";
+	gotoXY(60, 20);
+	_flushall();
+	cin >> lenh;
+	cin.ignore();
 	return lenh;
 }
+
+void Menu::passLevel()
+{
+	gotoXY(25, 18);
+	cout << "=====================================" << endl;
+	gotoXY(25, 19);
+	cout << "|         CONGRATULATIONS!          |" << endl;
+	gotoXY(25, 20);
+	cout << "|       YOU PASS THIS LEVEL         |" << endl;
+	gotoXY(25, 21);
+	cout << "=====================================" << endl;
+	system("pause>nul");
+}
+
+void Menu::winGame()
+{
+	gotoXY(25, 18);
+	cout << "============================================" << endl;
+	gotoXY(25, 19);
+	cout << "|             CONGRATULATIONS!             |" << endl;
+	gotoXY(25, 20);
+	cout << "|     YOU ARE KING OF BREAK BRICKS GAME    |" << endl;
+	gotoXY(25, 21);
+	cout << "============================================" << endl;
+	system("pause>nul");
+}
+
 
 
 
