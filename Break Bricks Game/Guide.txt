@@ -1,6 +1,7 @@
 ============================================================================
 |                               CACH CHOI                                  |
 ============================================================================
+SU DUNG PHIM DIEU HUONG DE DI CHUYEN HTANH TRUOT HUNG BONG
 I. Chon vao che do choi ma minh muon bang cach chon lenh tuong ung.
 - 1. PLAY: de choi moi.
 - 2. RESUME de tiep tuc choi phan choi lan choi truoc.

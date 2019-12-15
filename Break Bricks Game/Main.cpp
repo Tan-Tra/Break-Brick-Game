@@ -10,6 +10,9 @@ void main()
 
 	
 	Nocursortype();
-	GameManager breakBricks;
-	breakBricks.runGame();
+	/*GameManager breakBricks;
+	breakBricks.runGame();*/
+	Menu m;
+	
+	m.resultMenu(100, 1);
 }

@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Ball">
+    <Position X="6.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAgEACAAIACAAAIAIAACAAAAAYBAAEAAAAAAAIA=</HashCode>
+      <FileName>Ball.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameManager">
+    <Position X="2.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAACAgAAAAAAAAQAAAiAAACAAAABAAAAAgAAAAA=</HashCode>
+      <FileName>GameManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Item">
+    <Position X="8.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAQABAIAAEAAQAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Item.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ListUser">
+    <Position X="4.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAAAAAASAAAAAAAAIAEAQIAAAAAA=</HashCode>
+      <FileName>ListUser.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Map">
+    <Position X="10.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAQAAABAAAIBAQEAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Map.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Menu">
+    <Position X="10.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAABgAIAAAAAAAAEAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Menu.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Paddle">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAgEAAAAIAAAAIIgIAACAgAAAIACAAAACEAAAAA=</HashCode>
+      <FileName>Paddle.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Player">
+    <Position X="2" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAEAAAAAIAgIBAAEEAQAAAAABAAAAAAA=</HashCode>
+      <FileName>Player.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="User">
+    <Position X="4.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEBAAAAAAAAABABAIEAAAAAAAEEAAAAAAAQAAABAAA=</HashCode>
+      <FileName>User.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="vector2D">
+    <Position X="8.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgAAAAAAA=</HashCode>
+      <FileName>Map.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="eItem">
+    <Position X="6.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAAAAAAAAAAAAAQAgEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Item.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="eDir">
+    <Position X="11.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IBAAAAAAAAAAAgAAgAAAAAAAACICAQAgAAAAAAAAAAA=</HashCode>
+      <FileName>Paddle.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

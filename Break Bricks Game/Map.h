@@ -29,15 +29,20 @@ class Map
 protected:
 
 public:
-	int data[15][15];
-	int level;
-	int bricks;
+	int data[15][15];//ma trận lưu level
+	int level;//màn chơi
+	int bricks;//số gạch của màn chơi
+	//in màn chơi ra màn hình
 	void printMap();
+	//Function đọc màn chơi từ file lên
 	int freadMap(int level);
+	//đọc map
 	int fread(fstream& f);
+	//viết lại map xuống file
 	void fwrite(fstream& f);
+	//in tường
 	void drawWall();
 };
-
+//thay đổi màu
 void changeColor(int x, int y);
 

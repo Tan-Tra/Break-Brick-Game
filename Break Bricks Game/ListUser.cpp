@@ -39,7 +39,7 @@ void ListUser::loadFromFile()
 		delete a;
 	}
 	f.close();
-	sort(dsuser.begin(), dsuser.end());
+	sort(dsuser.begin(), dsuser.end(),compareUser);
 }
 
 void ListUser::fwriteGoal()
@@ -86,7 +86,7 @@ void ListUser::printHightScore()
 	{
 		gotoXY(44, 11 + i);
 		cout << dsuser[i].getTen();
-		gotoXY(80, 11 + i);
+		gotoXY(77, 11 + i);
 		cout << dsuser[i].getDiem();
 	}
 }

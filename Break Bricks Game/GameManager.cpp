@@ -80,7 +80,8 @@ int GameManager::play(bool& playing, int& broken_bricks)
 							break;
 						case TARGET:
 							player.score += 1000;
-							 
+							player.level++;
+
 							return 1;
 						default:
 							break;
@@ -349,6 +350,7 @@ void GameManager::runGame()
 						system("cls");
 						lenh = menu.resultMenu(player.score, player.level);
 						if (lenh == 1) {
+							player.broken_bricks = 0;
 							playing = true;
 							replay = true;
 						}
@@ -356,11 +358,12 @@ void GameManager::runGame()
 					}
 					if (check == -1)
 					{
-						break;
+						lenh = -1; break;
 					}
 					if (player.level <= 3)
 					{
 						menu.passLevel();
+						system("cls");
 						menu.textLevel(player.level);
 						system("pause>nul");
 						player.broken_bricks = 0;
@@ -396,6 +399,7 @@ void GameManager::runGame()
 						system("cls");
 						lenh = menu.resultMenu(player.score, player.level);
 						if (lenh == 1) {
+							player.broken_bricks = 0;
 							replay = true;
 							playing = true;
 						}
@@ -403,11 +407,12 @@ void GameManager::runGame()
 					}
 					if (check == -1)
 					{
-						break;
+						lenh = -1; break;
 					}
 					if (player.level <= 3)
 					{
 						menu.passLevel();
+						system("cls");
 						menu.textLevel(player.level);
 						system("pause>nul");
 						player.broken_bricks = 0;

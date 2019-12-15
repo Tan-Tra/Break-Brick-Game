@@ -1,0 +1,28 @@
+﻿  Ball.cpp
+D:\My Code\OOP\TH\Đồ án\Break-Brick-Game\Break Bricks Game\Ball.cpp(252,10): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\My Code\OOP\TH\Đồ án\Break-Brick-Game\Break Bricks Game\Ball.cpp(254,19): warning C4305: '*=': truncation from 'double' to 'float'
+D:\My Code\OOP\TH\Đồ án\Break-Brick-Game\Break Bricks Game\Ball.cpp(484,10): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\My Code\OOP\TH\Đồ án\Break-Brick-Game\Break Bricks Game\Ball.cpp(486,19): warning C4305: '*=': truncation from 'double' to 'float'
+D:\My Code\OOP\TH\Đồ án\Break-Brick-Game\Break Bricks Game\Ball.cpp(719,10): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  GameManager.cpp
+D:\My Code\OOP\TH\Đồ án\Break-Brick-Game\Break Bricks Game\Ball.cpp(721,19): warning C4305: '*=': truncation from 'double' to 'float'
+D:\My Code\OOP\TH\Đồ án\Break-Brick-Game\Break Bricks Game\GameManager.cpp(33,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Item.cpp
+  ListUser.cpp
+D:\My Code\OOP\TH\Đồ án\Break-Brick-Game\Break Bricks Game\GameManager.cpp(166,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Main.cpp
+D:\My Code\OOP\TH\Đồ án\Break-Brick-Game\Break Bricks Game\ListUser.cpp(84,53): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Map.cpp
+  Menu.cpp
+  Paddle.cpp
+  Player.cpp
+D:\My Code\OOP\TH\Đồ án\Break-Brick-Game\Break Bricks Game\Main.cpp(9,1): warning C4326: return type of 'main' should be 'int' instead of 'void'
+  Source.cpp
+D:\My Code\OOP\TH\Đồ án\Break-Brick-Game\Break Bricks Game\Player.cpp(42,36): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\My Code\OOP\TH\Đồ án\Break-Brick-Game\Break Bricks Game\Source.cpp(15,14): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
+  User.cpp
+  Generating Code...
+D:\My Code\OOP\TH\Đồ án\Break-Brick-Game\Break Bricks Game\Source.cpp(15,16): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
+D:\My Code\OOP\TH\Đồ án\Break-Brick-Game\Break Bricks Game\GameManager.cpp(156): warning C4715: 'GameManager::play': not all control paths return a value
+D:\My Code\OOP\TH\Đồ án\Break-Brick-Game\Break Bricks Game\GameManager.cpp(285): warning C4715: 'GameManager::autoPlay': not all control paths return a value
+  Break Bricks Game.vcxproj -> D:\My Code\OOP\TH\Đồ án\Break-Brick-Game\x64\Debug\Break Bricks Game.exe

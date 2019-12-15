@@ -16,16 +16,24 @@ public:
 
 	Paddle();
 	~Paddle();
+	//đặt vị trí cho paddle
 	void setPosition(vector2D& pos);
+	//đặt hướng di chuyển cho thanh trượt
 	void setDirection(eDir dir);
+	//lấy tọa độ thanh trượt
 	vector2D getPosition();
+	//lấy hướng di chuyển của thanh trượt
 	eDir getDirection();
 
+	//di chuyển trái
 	void moveLeft();
+	//di chuyển phải
 	void moveRight();
-
+	//vẽ thanh trượt
 	void draw();
+	//in che thanh trượt = xóa thanh trượt
 	void drawFill();
+	//thiết lập lại trnagj thái ban đầu cho thanh trượt
 	void reset();
 };
 

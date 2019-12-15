@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include<string>
 #include<iostream>
 #include<fstream>
@@ -6,9 +6,8 @@ using namespace std;
 
 class User
 {
-private:
-	string name; int diem, level;
 public:
+	string name; int diem, level;
 	User() { name = ""; diem = level = 0; }
 	User(const User& u)
 	{
@@ -23,28 +22,31 @@ public:
 		this->level = level;
 	}
 	~User() {}
-	bool operator<(const User& a)const
-	{
-		return(diem < a.diem);
-	}
+	//lấy tên người dùng
 	string getTen()
 	{
 		return name;
 	}
+	//lấy điểm
 	int getDiem()
 	{
 		return diem;
 	}
+	//lấy màn chơi
 	int getLevel()
 	{
 		return level;
 	}
+	//thiết lập điểm
 	void setDiem(int diem)
 	{
 		this->diem = diem;
 	}
+	//thiết lập màn chơi
 	void setLevel(int level)
 	{
 		this->level = level;
 	}
 };
+bool compareUser(User i1, User i2);
+
